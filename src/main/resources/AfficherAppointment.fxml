@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.controllers.AfficherAppointment"
+            prefWidth="600" prefHeight="450" stylesheets="@style.css" styleClass="PageBackgroundColor">
+    <children>
+        <VBox spacing="15" alignment="TOP_CENTER"
+              AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+
+            <!-- Filters -->
+            <HBox spacing="10">
+                <TextField fx:id="idField" promptText="Go to ID" styleClass="form-control"/>
+                <DatePicker fx:id="dateFilter" promptText="Filter by date" styleClass="form-control"/>
+                <TextField fx:id="keywordField" promptText="Keyword search" styleClass="form-control"/>
+            </HBox>
+
+            <ListView fx:id="display" prefHeight="320" styleClass="custom-listview"/>
+
+            <HBox spacing="15" alignment="CENTER">
+                <Button text="Edit" onAction="#edit" styleClass="action-button"/>
+                <Button text="Delete" onAction="#delete" styleClass="action-button"/>
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

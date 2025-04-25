@@ -1,0 +1,181 @@
+/* === Global Theme Variables === */
+.root {
+    -fx-primary: #ffb86c;     /* Muted orange */
+    -fx-secondary: #8be9fd;   /* Cyan */
+    -fx-accent1: #ff79c6;     /* Pink */
+    -fx-accent2: #ff5555;     /* Red */
+    -fx-background: #282a36;  /* Main dark background */
+    -fx-light: #44475a;       /* Secondary gray */
+}
+
+/* === Page & Layout Backgrounds === */
+.PageBackgroundColor {
+    -fx-background-color: -fx-background;
+    /* Removed problematic background-image for now */
+}
+
+.SideBarColor,
+.DashboardSideBarColor {
+    -fx-background-color: #343746;
+}
+
+/* === Labels & Text === */
+.case-title, .section-title, .section-title-dark {
+    -fx-text-fill: #f8f8f2;
+    -fx-font-weight: bold;
+}
+
+.case-title {
+    -fx-font-size: 20px;
+}
+
+.section-title {
+    -fx-font-size: 16px;
+}
+
+.section-title-dark {
+    -fx-font-size: 18px;
+}
+
+.detail-label,
+.case-detail {
+    -fx-text-fill: #bdc1d4;
+    -fx-font-size: 13px;
+}
+
+.description-text {
+    -fx-text-fill: #3b3e4d;
+    -fx-font-size: 14px;
+    -fx-line-spacing: 4px;
+}
+
+/* === Form Controls === */
+.form-control,
+.form-textarea,
+.form-combobox,
+.custom-textarea {
+    -fx-background-color: #3b3e4d;
+    -fx-border-color: #505368;
+    -fx-text-fill: #f8f8f2;
+    -fx-highlight-fill: #6272a4;
+    -fx-highlight-text-fill: #ffffff;
+    -fx-prompt-text-fill: #8be9fd;
+    -fx-font-size: 14px;
+    -fx-padding: 8 12;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+}
+
+.form-textarea {
+    -fx-min-height: 100px;
+    -fx-wrap-text: true;
+}
+
+.form-combobox {
+    -fx-display-caret: false;
+    -fx-cursor: hand;
+}
+
+/* === ComboBox Dropdown === */
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: #3b3e4d;
+    -fx-text-fill: #f8f8f2;
+}
+.combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-background-color: #505368;
+}
+.combo-box .arrow {
+    -fx-background-color: #505368;
+}
+
+/* === Buttons === */
+.button,
+.action-button,
+.status-btn,
+.visibility-btn,
+.delete-btn {
+    -fx-background-radius: 4;
+    -fx-padding: 10 20;
+    -fx-font-size: 14px;
+    -fx-text-fill: #f8f8f2;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 1, 1);
+}
+
+.action-button {
+    -fx-background-color: linear-gradient(to bottom, #b89442, #8c6d31);
+    -fx-border-color: #705628;
+}
+.action-button:hover {
+    -fx-background-color: #a07e38;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0, 2, 2);
+}
+
+.status-btn     { -fx-background-color: #388e3c; }
+.visibility-btn { -fx-background-color: #1976d2; }
+.delete-btn     { -fx-background-color: #d32f2f; }
+
+/* === ListViews & Cells === */
+.list-view {
+    -fx-background-color: -fx-background;
+    -fx-border-color: -fx-light;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+}
+
+.list-cell {
+    -fx-background-color: -fx-background;
+    -fx-text-fill: #f8f8f2;
+    -fx-padding: 12;
+    -fx-border-color: -fx-light;
+    -fx-border-width: 0 0 1 0;
+}
+.list-cell:filled:hover {
+    -fx-background-color: #505368;
+}
+
+/* === Case Items === */
+.case-item {
+    -fx-background-color: #44475a;
+    -fx-background-radius: 4;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 1, 1);
+    -fx-padding: 15;
+    -fx-text-fill: #f8f8f2;
+}
+.case-item:hover {
+    -fx-background-color: #505368;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0, 2, 2);
+}
+
+/* === Misc Elements === */
+.separator {
+    -fx-padding: 8 0;
+    -fx-border-color: #505368;
+}
+.icon {
+    -fx-font-family: "Font Awesome 5 Free Solid";
+    -fx-font-size: 14px;
+    -fx-text-fill: #8be9fd;
+}
+.custom-listview .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #f8f8f2;      /* Light text for dark background */
+    -fx-padding: 12 8;          /* Adequate padding */
+}
+
+
+.custom-listview .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #f8f8f2;
+}
+.custom-listview .list-cell:filled:hover {
+    -fx-background-color: #505368;
+}
+/* Ensure the TextArea background is white and the text is black */
+.form-textarea {
+    -fx-control-inner-background: white;  /* inner background */
+    -fx-text-fill: black;                 /* typing/text color */
+    -fx-prompt-text-fill: #888888;        /* placeholder text color */
+    -fx-highlight-fill: lightgray;        /* selection background */
+    -fx-highlight-text-fill: black;       /* selection text color */
+}

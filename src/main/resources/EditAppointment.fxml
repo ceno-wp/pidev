@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controllers.EditAppointment"
+            stylesheets="@../../style.css"
+            prefWidth="400" prefHeight="400"
+            styleClass="PageBackgroundColor">
+
+    <children>
+        <VBox spacing="10" layoutX="50" layoutY="30">
+            <DatePicker fx:id="datePicker" promptText="Date" disable="true"/>
+            <TextField fx:id="timeField" promptText="Time (e.g. 14:30)"/>
+            <ComboBox fx:id="statusCombo" promptText="Status">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Scheduled"/>
+                        <String fx:value="Completed"/>
+                        <String fx:value="Cancelled"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <TextArea fx:id="descriptionArea" promptText="Description" prefRowCount="4"/>
+            <Button text="Save" onAction="#save"/>
+        </VBox>
+    </children>
+</AnchorPane>
