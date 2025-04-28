@@ -1,119 +1,98 @@
 package tn.esprit.models;
 
+import javafx.beans.property.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Payment {
-    private int id;
-    private int appointmentId;
-    private BigDecimal amount;
-    private String currency;
-    private String method;
-    private String status;
-    private LocalDateTime paidAt;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private IntegerProperty paymentId;
+    private IntegerProperty appointmentId;
+    private StringProperty paymentStatus;
+    private StringProperty paymentMethod;
+    private ObjectProperty<LocalDateTime> paymentDate;
+    private DoubleProperty amount;
 
+    // Constructor to initialize properties
     public Payment() {
+        this.paymentId = new SimpleIntegerProperty();
+        this.appointmentId = new SimpleIntegerProperty();
+        this.paymentStatus = new SimpleStringProperty();
+        this.paymentMethod = new SimpleStringProperty();
+        this.paymentDate = new SimpleObjectProperty<>();
+        this.amount = new SimpleDoubleProperty();
     }
 
-    public Payment(int id, int appointmentId, BigDecimal amount, String currency, String method,
-                   String status, LocalDateTime paidAt, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.id = id;
-        this.appointmentId = appointmentId;
-        this.amount = amount;
-        this.currency = currency;
-        this.method = method;
-        this.status = status;
-        this.paidAt = paidAt;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    // Getters and setters
+    public int getPaymentId() {
+        return paymentId.get();
     }
 
-    public int getId() {
-        return id;
+    public void setPaymentId(int paymentId) {
+        this.paymentId.set(paymentId);
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public IntegerProperty paymentIdProperty() {
+        return paymentId;
     }
 
     public int getAppointmentId() {
-        return appointmentId;
+        return appointmentId.get();
     }
 
     public void setAppointmentId(int appointmentId) {
-        this.appointmentId = appointmentId;
+        this.appointmentId.set(appointmentId);
+    }
+
+    public IntegerProperty appointmentIdProperty() {
+        return appointmentId;
+    }
+
+    public String getPaymentStatus() {
+        return paymentStatus.get();
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus.set(paymentStatus);
+    }
+
+    public StringProperty paymentStatusProperty() {
+        return paymentStatus;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod.get();
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod.set(paymentMethod);
+    }
+
+    public StringProperty paymentMethodProperty() {
+        return paymentMethod;
+    }
+
+    public LocalDateTime getPaymentDate() {
+        return paymentDate.get();
+    }
+
+    public void setPaymentDate(LocalDateTime paymentDate) {
+        this.paymentDate.set(paymentDate);
+    }
+
+    public ObjectProperty<LocalDateTime> paymentDateProperty() {
+        return paymentDate;
     }
 
     public BigDecimal getAmount() {
-        return amount;
+        return BigDecimal.valueOf(amount.get());  // Convert double to BigDecimal
     }
 
     public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+        this.amount.set(amount.doubleValue());  // Convert BigDecimal to double
     }
 
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    public String getMethod() {
-        return method;
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getPaidAt() {
-        return paidAt;
-    }
-
-    public void setPaidAt(LocalDateTime paidAt) {
-        this.paidAt = paidAt;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    @Override
-    public String toString() {
-        return "Payment{" +
-                "id=" + id +
-                ", appointmentId=" + appointmentId +
-                ", amount=" + amount +
-                ", currency='" + currency + '\'' +
-                ", method='" + method + '\'' +
-                ", status='" + status + '\'' +
-                ", paidAt=" + paidAt +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
+    public DoubleProperty amountProperty() {
+        return amount;
     }
 }

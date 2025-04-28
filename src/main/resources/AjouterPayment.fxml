@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 
-<VBox spacing="10.0" xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="tn.esprit.controllers.AjouterPayment">
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.controllers.AjouterPayment" stylesheets="@style.css">
+    <children>
+        <VBox spacing="20" alignment="CENTER" padding="20">
+            <!-- Appointment ID Field -->
+            <TextField fx:id="appointmentIdField" promptText="Enter Appointment ID" />
 
-    <Label text="Montant:"/>
-    <TextField fx:id="amountField" promptText="ex: 150.00"/>
+            <!-- Amount Field -->
+            <TextField fx:id="amountField" promptText="Enter Amount" />
 
-    <Label text="Devise (ISO 3-lettres):"/>
-    <TextField fx:id="currencyField" promptText="ex: TND"/>
+            <!-- Payment Status ComboBox -->
+            <ComboBox fx:id="paymentStatusCombo" promptText="Select Payment Status" />
 
-    <Label text="Méthode de paiement:"/>
-    <ComboBox fx:id="methodCombo"/>
+            <!-- Payment Method ComboBox -->
+            <ComboBox fx:id="paymentMethodCombo" promptText="Select Payment Method" />
 
-    <Label text="Statut:"/>
-    <ComboBox fx:id="statusCombo"/>
+            <!-- Payment Date Picker -->
+            <DatePicker fx:id="paymentDatePicker" promptText="Select Payment Date" />
 
-    <Button text="Ajouter Paiement" onAction="#handleAddPayment"/>
-</VBox>
+            <!-- Save Button -->
+            <Button text="Save Payment" onAction="#savePayment" />
+        </VBox>
+    </children>
+</AnchorPane>

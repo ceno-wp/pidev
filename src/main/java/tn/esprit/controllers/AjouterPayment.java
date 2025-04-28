@@ -1,79 +1,92 @@
 package tn.esprit.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import tn.esprit.models.Payment;
-import tn.esprit.services.ServicePayment;
+import tn.esprit.services.PaymentService;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class AjouterPayment {
 
+    @FXML private TextField appointmentIdField;
     @FXML private TextField amountField;
-    @FXML private TextField currencyField;
-    @FXML private ComboBox<String> methodCombo;
-    @FXML private ComboBox<String> statusCombo;
+    @FXML private ComboBox<String> paymentStatusCombo;
+    @FXML private ComboBox<String> paymentMethodCombo;
+    @FXML private DatePicker paymentDatePicker;
 
-    // Will be set by the caller so we know which appointment this payment is for:
-    private int appointmentId;
+    private final PaymentService paymentService = new PaymentService();
 
-    private final ServicePayment service = new ServicePayment();
-
-    /** Called by FXMLLoader after controls are injected */
     @FXML
     public void initialize() {
-        methodCombo.getItems().addAll("Cash", "Credit Card", "Bank Transfer");
-        statusCombo.getItems().addAll("PENDING", "PAID", "FAILED", "REFUNDED");
-        // Optionally select defaults:
-        methodCombo.getSelectionModel().selectFirst();
-        statusCombo.getSelectionModel().select("PENDING");
+        // Setup payment status and method combo boxes
+        paymentStatusCombo.getItems().addAll("Pending", "Paid", "Failed");
+        paymentStatusCombo.setValue("Pending");
+
+        paymentMethodCombo.getItems().addAll("Credit Card", "PayPal", "Bank Transfer");
+        paymentMethodCombo.setValue("Credit Card");
     }
 
-    /** Setter to receive appointmentId before showing this dialog */
-    public void setAppointmentId(int appointmentId) {
-        this.appointmentId = appointmentId;
-    }
-
-    /** Called when user clicks “Ajouter Paiement” */
     @FXML
-    private void handleAddPayment() {
+    void savePayment(ActionEvent event) {
+        String errorMsg = validateInputs();
+        if (!errorMsg.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Validation Error", errorMsg);
+            return;
+        }
+
         try {
-            // Build Payment object
-            Payment p = new Payment();
-            p.setAppointmentId(appointmentId);
-            p.setAmount(new BigDecimal(amountField.getText().trim()));
-            p.setCurrency(currencyField.getText().trim().toUpperCase());
-            p.setMethod(methodCombo.getValue());
-            p.setStatus(statusCombo.getValue());
-            p.setPaidAt(LocalDateTime.now());
-            // createdAt & updatedAt handled by DB defaults/ON UPDATE
+            Payment payment = new Payment();
+            payment.setAppointmentId(Integer.parseInt(appointmentIdField.getText().trim()));
+            payment.setPaymentStatus(paymentStatusCombo.getValue());
+            payment.setAmount(new BigDecimal(amountField.getText().trim()));
+            payment.setPaymentMethod(paymentMethodCombo.getValue());
+            payment.setPaymentDate(paymentDatePicker.getValue().atStartOfDay());
 
-            // Persist
-            service.add(p);
+            // Save payment
+            if (paymentService.addPayment(payment)) {
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Payment added successfully!");
+                clearForm();
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Error", "Failed to add payment.");
+            }
 
-            // Success alert
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText("Succès");
-            alert.setContentText("Paiement enregistré pour RDV #" + appointmentId);
-            alert.showAndWait();
-
-            // Optionally close the window:
-            amountField.getScene().getWindow().hide();
-
-        } catch (NumberFormatException nfe) {
-            showError("Le montant doit être un nombre valide.");
-        } catch (Exception ex) {
-            showError("Erreur lors de l'enregistrement : " + ex.getMessage());
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to add payment: " + e.getMessage());
         }
     }
 
-    private void showError(String msg) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText("Erreur");
-        alert.setContentText(msg);
+    private String validateInputs() {
+        StringBuilder errorMsg = new StringBuilder();
+
+        if (appointmentIdField.getText().trim().isEmpty())
+            errorMsg.append("Please enter the appointment ID.\n");
+
+        if (amountField.getText().trim().isEmpty())
+            errorMsg.append("Please enter the payment amount.\n");
+
+        if (paymentDatePicker.getValue() == null)
+            errorMsg.append("Please select the payment date.\n");
+
+        return errorMsg.toString();
+    }
+
+    private void clearForm() {
+        appointmentIdField.clear();
+        amountField.clear();
+        paymentStatusCombo.setValue("Pending");
+        paymentMethodCombo.setValue("Credit Card");
+        paymentDatePicker.setValue(null);
+    }
+
+    private void showAlert(Alert.AlertType type, String title, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
         alert.showAndWait();
     }
+
 }

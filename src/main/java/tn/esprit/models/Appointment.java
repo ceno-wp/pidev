@@ -1,12 +1,14 @@
 package tn.esprit.models;
 
+import tn.esprit.utils.MailService;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Appointment {
     private int id;
     private LocalDateTime date;
-    private String status;
+    private String time_period;
     private String description;
     private int clientId;
     private int lawyerId;
@@ -15,11 +17,11 @@ public class Appointment {
     // Constructors
     public Appointment() {}
 
-    public Appointment(int id, LocalDateTime date, String status, String description,
+    public Appointment(int id, LocalDateTime date, String time_period, String description,
                        int clientId, int lawyerId, LocalDateTime createdAt) {
         this.id = id;
         this.date = date;
-        this.status = status;
+        this.time_period = time_period;
         this.description = description;
         this.clientId = clientId;
         this.lawyerId = lawyerId;
@@ -33,8 +35,8 @@ public class Appointment {
     public LocalDateTime getDate() { return date; }
     public void setDate(LocalDateTime date) { this.date = date; }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public String getTime_period() { return time_period; }
+    public void setTime_period(String time_period) { this.time_period = time_period; }
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
@@ -54,7 +56,8 @@ public class Appointment {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return "🔖 Appointment ID: " + id
                 + " | 📅 " + date.format(formatter)
-                + " | Status: " + status
+                + " | Time_period: " + time_period
                 + "\n📝 " + description;
     }
+
 }

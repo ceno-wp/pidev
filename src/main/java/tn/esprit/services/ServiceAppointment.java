@@ -5,6 +5,7 @@ import tn.esprit.models.Appointment;
 import tn.esprit.utils.MyDatabase;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,14 +17,30 @@ public class ServiceAppointment implements IService<Appointment> {
         cnx = MyDatabase.getInstance().getCnx();
     }
 
+    // Add this method to check if an appointment exists at the specified date and time
+    public boolean isAppointmentExists(LocalDateTime dateTime) {
+        String sql = "SELECT COUNT(*) FROM `rendez-vous` WHERE date = ?";
+
+        try (PreparedStatement pstm = cnx.prepareStatement(sql)) {
+            pstm.setTimestamp(1, Timestamp.valueOf(dateTime));
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0; // Return true if there's an existing appointment
+            }
+        } catch (SQLException e) {
+            System.out.println("Error checking if appointment exists: " + e.getMessage());
+        }
+        return false; // No appointment found at the same time
+    }
+
     @Override
     public void add(Appointment a) {
-        String qry = "INSERT INTO `rendez-vous`(date, status, description, createdAt) VALUES (?, ?, ?, ?)";
+        String qry = "INSERT INTO `rendez-vous`(date, time_period, description, createdAt) VALUES (?, ?, ?, ?)";
 
         try {
             PreparedStatement pstm = cnx.prepareStatement(qry);
             pstm.setTimestamp(1, Timestamp.valueOf(a.getDate()));
-            pstm.setString(2, a.getStatus());
+            pstm.setString(2, a.getTime_period());
             pstm.setString(3, a.getDescription());
             pstm.setTimestamp(4, Timestamp.valueOf(a.getCreatedAt()));
             pstm.executeUpdate();
@@ -43,7 +60,7 @@ public class ServiceAppointment implements IService<Appointment> {
                 Appointment a = new Appointment();
                 a.setId(rs.getInt("id"));
                 a.setDate(rs.getTimestamp("date").toLocalDateTime());
-                a.setStatus(rs.getString("status"));
+                a.setTime_period(rs.getString("time_period"));
                 a.setDescription(rs.getString("description"));
                 a.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
                 appointments.add(a);
@@ -57,12 +74,12 @@ public class ServiceAppointment implements IService<Appointment> {
 
     @Override
     public void update(Appointment a) {
-        String qry = "UPDATE `rendez-vous` SET date=?, status=?, description=?, createdAt=? WHERE id=?";
+        String qry = "UPDATE `rendez-vous` SET date=?, time_period=?, description=?, createdAt=? WHERE id=?";
 
         try {
             PreparedStatement pstm = cnx.prepareStatement(qry);
             pstm.setTimestamp(1, Timestamp.valueOf(a.getDate()));
-            pstm.setString(2, a.getStatus());
+            pstm.setString(2, a.getTime_period());
             pstm.setString(3, a.getDescription());
             pstm.setTimestamp(4, Timestamp.valueOf(a.getCreatedAt()));
             pstm.setInt(5, a.getId());

@@ -11,7 +11,7 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1"
             xmlns="http://javafx.com/javafx/23.0.1"
             fx:controller="tn.esprit.controllers.AjouterAppointment"
-            prefWidth="600.0" prefHeight="450.0"
+            prefWidth="600.0" prefHeight="500.0"
             stylesheets="@style.css"
             styleClass="PageBackgroundColor">
 
@@ -34,6 +34,7 @@
                <RowConstraints minHeight="40"/>
                <RowConstraints minHeight="90"/>
                <RowConstraints minHeight="40"/>
+               <RowConstraints minHeight="40"/> <!-- Added for Email -->
             </rowConstraints>
 
             <!-- Date -->
@@ -41,15 +42,29 @@
             <DatePicker fx:id="datePicker"
                         GridPane.rowIndex="0" GridPane.columnIndex="1"
                         styleClass="form-control"
-                        editable="false" />  <!-- disable manual typing -->
+                        editable="false" />
 
             <!-- Description -->
             <Label text="📝 Case Description:" styleClass="detail-label" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-            <TextArea fx:id="descriptionArea" prefHeight="90" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="form-textarea"/>
+            <TextArea fx:id="descriptionArea"
+                      prefHeight="90"
+                      styleClass="form-textarea"
+                      GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
             <!-- Time Slot -->
             <Label text="⏰ Time Slot:" styleClass="detail-label" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-            <ComboBox fx:id="statusCombo" promptText="Select time slot" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="form-combobox"/>
+            <ComboBox fx:id="time_periodCombo"
+                      promptText="Select time slot"
+                      styleClass="form-combobox"
+                      GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <!-- Email -->
+            <Label text="📧 Your Email:" styleClass="detail-label" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                     <TextField fx:id="emailField"
+                       promptText="Enter your email..."
+                       styleClass="form-control"
+                       GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
          </GridPane>
 
          <!-- Buttons -->

@@ -8,7 +8,6 @@ import tn.esprit.services.ServiceAppointment;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class EditAppointment {
 
@@ -16,10 +15,7 @@ public class EditAppointment {
     private DatePicker datePicker;
 
     @FXML
-    private TextField timeField;
-
-    @FXML
-    private ComboBox<String> statusCombo;
+    private ComboBox<String> time_periodCombo;
 
     @FXML
     private TextArea descriptionArea;
@@ -29,19 +25,23 @@ public class EditAppointment {
     public void setAppointmentToEdit(Appointment appointment) {
         this.appointment = appointment;
         datePicker.setValue(appointment.getDate().toLocalDate());
-        timeField.setText(appointment.getDate().toLocalTime().toString());
-        statusCombo.setValue(appointment.getStatus());
+        time_periodCombo.setValue(appointment.getTime_period());
         descriptionArea.setText(appointment.getDescription());
     }
 
     @FXML
     void save(ActionEvent event) {
         LocalDate date = datePicker.getValue();
-        LocalTime time = LocalTime.parse(timeField.getText());
+        LocalDateTime dateTime = date.atStartOfDay(); // Time will default to 00:00
 
-        LocalDateTime dateTime = LocalDateTime.of(date, time);
+        // Check if an appointment already exists at the selected date and time
+        if (new ServiceAppointment().isAppointmentExists(dateTime)) {
+            showAlert(Alert.AlertType.ERROR, "Time Slot Unavailable", "An appointment already exists at this time.");
+            return;
+        }
+
         appointment.setDate(dateTime);
-        appointment.setStatus(statusCombo.getValue());
+        appointment.setTime_period(time_periodCombo.getValue());
         appointment.setDescription(descriptionArea.getText());
 
         new ServiceAppointment().update(appointment);
@@ -53,5 +53,14 @@ public class EditAppointment {
         alert.showAndWait();
 
         ((Button) event.getSource()).getScene().getWindow().hide();
+    }
+
+    // Create the showAlert method
+    private void showAlert(Alert.AlertType type, String title, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }

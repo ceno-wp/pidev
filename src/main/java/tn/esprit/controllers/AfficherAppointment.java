@@ -59,7 +59,7 @@ public class AfficherAppointment {
                     }
                     // 3) Keyword filter
                     if (!kw.isEmpty() && !app.getDescription().toLowerCase().contains(kw)
-                            && !app.getStatus().toLowerCase().contains(kw)) {
+                            && !app.getTime_period().toLowerCase().contains(kw)) {
                         return false;
                     }
                     return true;

@@ -15,7 +15,6 @@
     </properties>
 
     <dependencies>
-
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
@@ -36,6 +35,12 @@
             <version>22.0.2</version>
         </dependency>
 
+        <!-- JavaMail API -->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -52,5 +57,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
