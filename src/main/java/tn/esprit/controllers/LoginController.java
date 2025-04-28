@@ -9,7 +9,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+
 import tn.esprit.utils.MyDataBase;
+import tn.esprit.utils.SessionManager;
 
 import java.io.File;
 import java.net.URL;
@@ -26,57 +28,28 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            File brandingFile = new File("/images/LegalLink-NoBg.png");
+            File brandingFile = new File("images/Logo.png");
             Image brandingImage = new Image(brandingFile.toURI().toString());
             brandingImageView.setImage(brandingImage);
         } catch (Exception e) {
             System.err.println("Error loading logo: " + e.getMessage());
         }
-
-        // Debug: Check if dashboard file exists
-        debugFileLocation("HomePage.fxml");
-    }
-
-    private void debugFileLocation(String filename) {
-        try {
-            System.out.println("\n=== FILE LOCATION DEBUG ===");
-            URL url = getClass().getResource(filename);
-            if (url == null) {
-                System.err.println("ERROR: " + filename + " not found in:");
-                System.err.println("Class location: " + getClass().getResource("."));
-
-                // Try alternative paths
-                System.out.println("Trying absolute path...");
-                url = getClass().getResource("/com/example/pidev/" + filename);
-                if (url != null) {
-                    System.out.println("Found at: " + url);
-                } else {
-                    System.err.println("Still not found at absolute path");
-                }
-            } else {
-                System.out.println(filename + " found at: " + url);
-            }
-            System.out.println("=========================\n");
-        } catch (Exception e) {
-            System.err.println("Debug error: " + e.getMessage());
-        }
     }
 
     @FXML
     private void loginButtonOnAction(javafx.event.ActionEvent event) {
-        loginMessageLabel.setText(""); // Clear previous messages
+        loginMessageLabel.setText("");
         if (emailTextField.getText().isBlank() || enterPasswordField.getText().isBlank()) {
             loginMessageLabel.setText("Please enter email and password");
             return;
         }
-
         validateLogin();
     }
 
     private void validateLogin() {
-        String verifyLogin = "SELECT password, roles FROM user WHERE email = ?";
+        String verifyLogin = "SELECT id, name, email, phonenumber, roles, password FROM user WHERE email = ?";
 
-        try (Connection connectDB = MyDataBase.getInstance().getCnx(); // Updated here
+        try (Connection connectDB = MyDataBase.getInstance().getCnx();
              PreparedStatement statement = connectDB.prepareStatement(verifyLogin)) {
 
             statement.setString(1, emailTextField.getText().trim());
@@ -87,11 +60,25 @@ public class LoginController implements Initializable {
                     String roles = queryResult.getString("roles");
 
                     if (storedPassword != null && storedPassword.equals(enterPasswordField.getText())) {
-                        if (roles != null && roles.contains("ROLE_ADMIN")) { // Corrected here
-                            loadDashboard("/AdminDashboard.fxml", "Admin Page");
+                        // Create user object from database result
+                        ManageUserController.User loggedInUser = new ManageUserController.User(
+                                queryResult.getInt("id"),
+                                queryResult.getString("name"),
+                                queryResult.getString("email"),
+                                queryResult.getString("phonenumber"),
+                                roles
+                        );
+
+                        // Store user in session
+                        SessionManager.loginUser(loggedInUser);
+
+                        // Redirect based on role
+                        if (roles.contains("ROLE_ADMIN")) {
+                            loadDashboard("/AdminDashboard.fxml", "Admin Dashboard", loggedInUser);
                         } else {
-                            loginMessageLabel.setText("Login Successful");
-                            loadDashboard("/HomePage.fxml", "Home Page");
+                            loadDashboard("/HomePage.fxml", "Home Page", loggedInUser);
+                            // After login
+                            System.out.println("Logged in with role: " + SessionManager.getCurrentUser().getRole());
                         }
                     } else {
                         loginMessageLabel.setText("Invalid credentials");
@@ -109,20 +96,29 @@ public class LoginController implements Initializable {
         }
     }
 
-    private void loadDashboard(String fxmlPath, String title) {
+    private void loadDashboard(String fxmlPath, String title, ManageUserController.User user) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
-            Stage currentStage = (Stage) emailTextField.getScene().getWindow();
-            currentStage.setScene(new Scene(root));
-            currentStage.setTitle(title);
-            currentStage.show();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+
+            // Pass user data to dashboard controller if needed
+            if (loader.getController() instanceof AdminDashboardController) {
+                ((AdminDashboardController) loader.getController()).setCurrentUser(user);
+            } else if (loader.getController() instanceof HomePageController) {
+                ((HomePageController) loader.getController()).setCurrentUser(user);
+            }
+
+            Stage stage = (Stage) emailTextField.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle(title);
+            stage.show();
+
         } catch (Exception e) {
-            String errorMsg = "Failed to load dashboard: " + e.getMessage();
-            loginMessageLabel.setText(errorMsg);
-            System.err.println(errorMsg);
+            loginMessageLabel.setText("Failed to load dashboard: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
 
 
     @FXML
@@ -138,4 +134,7 @@ public class LoginController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    // Keep debug method but removed for brevity
+    private void debugFileLocation(String filename) { /* ... */ }
 }

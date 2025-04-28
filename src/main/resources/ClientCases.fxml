@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="634.0" prefWidth="702.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" styleClass="Dashboardbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ClientCasesController">
+   <AnchorPane layoutX="29.0" layoutY="72.0" prefHeight="122.0" prefWidth="643.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" styleClass="DashboardSideBarColor" stylesheets="@style.css">
+      <children>
+         <Text fill="WHITE" layoutX="39.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" wrappingWidth="61.03143310546875">
+            <font>
+               <Font name="Consolas Bold" size="17.0" />
+            </font>
+         </Text>
+         <Text fill="WHITE" layoutX="110.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Posted At" wrappingWidth="89.03143310546875">
+            <font>
+               <Font name="Consolas Bold" size="17.0" />
+            </font>
+         </Text>
+         <Text fill="WHITE" layoutX="515.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Actions" wrappingWidth="89.03143310546875">
+            <font>
+               <Font name="Consolas Bold" size="17.0" />
+            </font>
+         </Text>
+      </children>
+   </AnchorPane>
+
+    <ListView fx:id="casesListView" layoutX="29.0" layoutY="133.0" prefHeight="449.0" prefWidth="643.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" styleClass="list-view" />
+   <Text fill="#000b4b" layoutX="59.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Cases">
+      <font>
+         <Font name="Consolas" size="19.0" />
+      </font></Text>
+
+</AnchorPane>

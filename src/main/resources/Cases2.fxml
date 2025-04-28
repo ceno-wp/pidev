@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="688" prefWidth="933" styleClass="SideBarColor" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.Cases2Controller">
+
+    <ListView fx:id="listView" layoutX="200.0" layoutY="19.0" prefHeight="654.0" prefWidth="714.0" style="-fx-background-radius: 13; -fx-border-radius: 13;" />
+
+    <ImageView fitHeight="106" fitWidth="200" layoutY="-1">
+        <image>
+            <Image url="@images/LegalLink-NoBg.png" />
+        </image>
+    </ImageView>
+    <Button layoutX="22.0" layoutY="282.0" mnemonicParsing="false" onAction="#handleDiscover" prefHeight="44.0" prefWidth="155.0" style="-fx-background-radius: 13; -fx-border-radius: 13;" stylesheets="@style.css" text="Discover">
+        <styleClass>
+            <String fx:value="SideBarColor" />
+            <String fx:value="Navbar-back-button" />
+        </styleClass>
+        <font>
+            <Font name="Consolas" size="19.0" />
+        </font>
+    </Button>
+    <Button layoutX="21.0" layoutY="153.0" mnemonicParsing="false" onAction="#handlePostCase" prefHeight="44.0" prefWidth="155.0" style="-fx-background-radius: 13; -fx-border-radius: 13;" stylesheets="@style.css" text="+ Post a Case">
+        <styleClass>
+            <String fx:value="SideBarColor" />
+            <String fx:value="Navbar-back-button" />
+        </styleClass>
+        <font>
+            <Font name="Consolas" size="18.0" />
+        </font>
+    </Button>
+    <Button layoutX="22.0" layoutY="344.0" mnemonicParsing="false" onAction="#handleCases" prefHeight="44.0" prefWidth="155.0" style="-fx-background-radius: 13; -fx-border-radius: 13;" stylesheets="@style.css" text="Cases">
+        <styleClass>
+            <String fx:value="SideBarColor" />
+            <String fx:value="Navbar-back-button" />
+        </styleClass>
+        <font>
+            <Font name="Consolas" size="19.0" />
+        </font>
+    </Button>
+    <Line endX="-2.0000152587890625" layoutX="200.0" layoutY="105.0" startX="-200.0" />
+    <Button layoutX="22.0" layoutY="549.0" mnemonicParsing="false" onAction="#handleSettings" prefHeight="44.0" prefWidth="155.0" style="-fx-background-radius: 13; -fx-border-radius: 13;" stylesheets="@style.css" text="Settings">
+        <styleClass>
+            <String fx:value="SideBarColor" />
+            <String fx:value="Navbar-back-button" />
+        </styleClass>
+        <font>
+            <Font name="Consolas" size="17.0" />
+        </font>
+    </Button>
+    <Button layoutX="22.0" layoutY="417.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="155.0" style="-fx-background-radius: 13; -fx-border-radius: 13;" stylesheets="@style.css" text="idk">
+        <styleClass>
+            <String fx:value="SideBarColor" />
+            <String fx:value="Navbar-back-button" />
+        </styleClass>
+        <font>
+            <Font name="Consolas" size="19.0" />
+        </font>
+    </Button>
+</AnchorPane>

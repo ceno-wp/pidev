@@ -11,8 +11,11 @@ public class Case {
     private String visibility;
     private String description;
     private String telephone;
-    private String status = "OPEN"; // Default value
+    private String status = "OPEN";
+    private String claimed_by_id;
+    private String claimStatus;// Default value
     private LocalDateTime createdAt;
+    private LocalDateTime resolvedAt;
     // claimedById, claimStatus, resolvedAt omitted for now
 
     // Constructor without auto-generated fields (id, createdAt)
@@ -25,11 +28,47 @@ public class Case {
         this.visibility = visibility;
         this.description = description;
         this.telephone = telephone;
-        this.createdAt = LocalDateTime.now(); // Auto-set timestamp
+        this.claimed_by_id= claimed_by_id;
+        this.claimStatus= claimStatus;
+        this.createdAt = LocalDateTime.now();
+        this.resolvedAt = LocalDateTime.now();// Auto-set timestamp
     }
 
     public int getId() {
         return id;
+    }
+
+    //   public String getClaimed_by_id() {
+    //   return claimed_by_id;
+    //  }
+
+    public String getClaimStatus() {
+        return claimStatus;
+    }
+
+    public void setClaimStatus(String claimStatus) {
+        this.claimStatus = claimStatus;
+    }
+
+    //   public void setClaimed_by_id(String claimed_by_id) {
+    //     this.claimed_by_id = claimed_by_id;
+    // }
+
+
+    public String getClaimed_by_id() {
+        return claimed_by_id;
+    }
+
+    public void setClaimed_by_id(String claimed_by_id) {
+        this.claimed_by_id = claimed_by_id;
+    }
+
+    public LocalDateTime getResolvedAt() {
+        return resolvedAt;
+    }
+
+    public void setResolvedAt(LocalDateTime resolvedAt) {
+        this.resolvedAt = resolvedAt;
     }
 
     public void setId(int id) {

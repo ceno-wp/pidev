@@ -21,6 +21,7 @@ public class AdminCasesController {
     @FXML private ListView<Case> casesListView;
     private final CaseService caseService = new CaseService();
 
+
     @FXML
     public void initialize() {
         casesListView.setItems(caseService.getCasesObservable());

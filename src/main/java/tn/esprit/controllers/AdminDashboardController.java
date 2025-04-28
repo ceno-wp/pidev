@@ -24,14 +24,11 @@ public class AdminDashboardController {
     @FXML private AnchorPane contentPane;
     @FXML private BarChart<String, Number> typeChart;
     private final CaseService caseService = new CaseService();
-    private boolean chartInitialized = false;
+
 
     @FXML
     public void initialize() {
-        if (!chartInitialized) {
-            initializeChart();
-            chartInitialized = true;
-        }
+        initializeChart();
     }
 
 
@@ -43,11 +40,15 @@ public class AdminDashboardController {
     private void loadPage(String fxmlPath) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
-            Stage stage = (Stage) listView.getScene().getWindow();
+            // Get the stage from any initialized UI component
+            Stage stage = (Stage) contentPane.getScene().getWindow(); // Changed from listView to contentPane
             stage.setScene(new Scene(root));
         } catch (IOException e) {
             showErrorAlert("Navigation Error", "Failed to load page: " + fxmlPath);
         }
+    }
+    public void setCurrentUser(ManageUserController.User user) {
+        // You can use this user data if needed
     }
 
 
@@ -60,21 +61,30 @@ public class AdminDashboardController {
     }
 
     private void initializeChart() {
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-        caseService.getCaseTypeCounts().forEach((type, count) ->
-                series.getData().add(new XYChart.Data<>(type, count))
-        );
-        typeChart.getData().add(series);
+        try {
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            caseService.getCaseTypeCounts().forEach((type, count) ->
+                    series.getData().add(new XYChart.Data<>(type, count))
+            );
+            typeChart.getData().clear();
+            typeChart.getData().add(series);
+        } catch (Exception e) {
+            showErrorAlert("Chart Error", "Failed to load chart data: " + e.getMessage());
+        }
     }
 
     @FXML
     private void showOverview() {
         contentPane.getChildren().clear();
-        if (!chartInitialized) {
-            contentPane.getChildren().add(typeChart);
-            chartInitialized = true;
-        }
+        initializeChart(); // Refresh data every time
+        contentPane.getChildren().add(typeChart);
     }
+
+
+
+
+
+
 
     @FXML
     private void showAllCases() {
@@ -98,6 +108,12 @@ public class AdminDashboardController {
             showErrorAlert("Navigation Error", "Failed to load cases view");
         }
     }
+
+    @FXML
+    private void handleBack() {
+        loadPage("/HomePage.fxml");  // Replace with your actual home page FXML
+    }
+
 
 
 

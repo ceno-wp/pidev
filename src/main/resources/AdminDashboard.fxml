@@ -9,38 +9,39 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="688" prefWidth="933" styleClass="DashboardSideBarColor" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AdminDashboardController">
-    <Button layoutY="237.0" mnemonicParsing="false" onAction="#showOverview" prefHeight="44.0" prefWidth="208.0" stylesheets="@style.css" text="  Overview" textFill="#fae3e3">
+<AnchorPane prefHeight="688" prefWidth="933" styleClass="White" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AdminDashboardController">
+    <Button layoutX="20.0" layoutY="267.0" mnemonicParsing="false" onAction="#showOverview" prefHeight="44.0" prefWidth="176.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@style.css" text="  Overview">
         <styleClass>
-            <String fx:value="DashboardSideBarColor" />
+            <String fx:value="White" />
             <String fx:value="Admin-Navbar-back-button" />
         </styleClass>
         <font>
-            <Font name="Consolas Bold" size="14.0" />
+            <Font name="Consolas Bold" size="17.0" />
         </font>
     </Button>
-    <Button layoutY="309.0" mnemonicParsing="false" onAction="#showAllCases" prefHeight="44.0" prefWidth="208.0" stylesheets="@style.css" text="   All Cases" textFill="#fae3e3">
+    <Button layoutX="20.0" layoutY="321.0" mnemonicParsing="false" onAction="#showAllCases" prefHeight="44.0" prefWidth="176.0" style="-fx-border-radius: 20; -fx-background-radius: 20;" stylesheets="@style.css" text="  All Cases">
         <styleClass>
-            <String fx:value="DashboardSideBarColor" />
+            <String fx:value="White" />
             <String fx:value="Admin-Navbar-back-button" />
         </styleClass>
         <font>
-            <Font name="Consolas Bold" size="14.0" />
+            <Font name="Consolas Bold" size="17.0" />
         </font>
     </Button>
-    <Button layoutX="-4.0" layoutY="443.0" mnemonicParsing="false" onAction="#handleDiscover" prefHeight="44.0" prefWidth="208.0" stylesheets="@style.css" text="  Sign Out" textFill="#fae3e3">
+    <Button layoutX="17.0" layoutY="489.0" mnemonicParsing="false" onAction="#handleDiscover" prefHeight="44.0" prefWidth="176.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@style.css" text="  Sign Out">
         <styleClass>
-            <String fx:value="DashboardSideBarColor" />
+            <String fx:value="White" />
             <String fx:value="Admin-Navbar-back-button" />
         </styleClass>
         <font>
-            <Font name="Consolas Bold" size="14.0" />
+            <Font name="Consolas Bold" size="17.0" />
         </font>
     </Button>
-    <AnchorPane fx:id="contentPane" layoutX="200.0" prefHeight="688" prefWidth="733" styleClass="PageBackgroundColor" stylesheets="@style.css">
+    <AnchorPane fx:id="contentPane" layoutX="215.0" layoutY="12.0" prefHeight="665.0" prefWidth="707.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" styleClass="Dashboardbackground" stylesheets="@style.css">
         <!-- Chart will be here when showing overview -->
-        <BarChart fx:id="typeChart" layoutX="51.0" layoutY="94.0" prefHeight="500" prefWidth="630">
+        <BarChart fx:id="typeChart" layoutX="76.0" layoutY="165.0" prefHeight="401.0" prefWidth="502.0">
             <xAxis>
                 <CategoryAxis label="Case Types" />
             </xAxis>
@@ -48,34 +49,64 @@
                 <NumberAxis label="Number of Cases" />
             </yAxis>
         </BarChart>
+      <AnchorPane layoutX="-1.0" prefHeight="94.0" prefWidth="707.0" style="-fx-background-radius: 14; -fx-border-radius: 14;" styleClass="DashboardSideBarColor" stylesheets="@style.css">
+         <children>
+            <Text fill="WHITE" layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="General Stats" wrappingWidth="142.15234375">
+               <font>
+                  <Font name="Consolas Bold" size="19.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
     </AnchorPane>
-   <ImageView fitHeight="151.0" fitWidth="200.0">
-      <image>
-         <Image url="@images/admindash-removebg-preview.png" />
-      </image>
-   </ImageView>
-   <ImageView layoutX="33.0" layoutY="315.0">
-      <image>
-         <Image url="@images/Open_env.png" />
-      </image>
-   </ImageView>
-   <ImageView layoutX="33.0" layoutY="449.0">
-      <image>
-         <Image url="@images/Signout-icon.png" />
-      </image>
-   </ImageView>
-   <ImageView layoutX="33.0" layoutY="243.0">
+   <Button layoutX="18.0" layoutY="378.0" mnemonicParsing="false" onAction="#ManageUser" prefHeight="44.0" prefWidth="176.0" style="-fx-background-radius: 20;" stylesheets="@style.css" text="Manage Users">
+      <styleClass>
+         <String fx:value="White" />
+         <String fx:value="Admin-Navbar-back-button" />
+      </styleClass>
+      <font>
+         <Font name="Consolas Bold" size="17.0" />
+      </font>
+      <graphic>
+         <ImageView>
+            <image>
+               <Image url="@images/icons8_Person_32px.png" />
+            </image>
+         </ImageView>
+      </graphic>
+   </Button>
+   <Button layoutX="18.0" layoutY="437.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="44.0" prefWidth="176.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@style.css" text="  HomePage">
+      <styleClass>
+         <String fx:value="White" />
+         <String fx:value="Admin-Navbar-back-button" />
+      </styleClass>
+      <font>
+         <Font name="Consolas Bold" size="17.0" />
+      </font>
+   </Button>
+   <ImageView layoutX="39.0" layoutY="443.0">
       <image>
          <Image url="@images/Home-icon.png" />
       </image>
    </ImageView>
-   <Button layoutX="-4.0" layoutY="377.0" mnemonicParsing="false" onAction="#ManageUser" prefHeight="44.0" prefWidth="200.0" stylesheets="@style.css" text="     Manage Users" textFill="#fae3e3">
-      <styleClass>
-         <String fx:value="DashboardSideBarColor" />
-         <String fx:value="Admin-Navbar-back-button" />
-      </styleClass>
-      <font>
-         <Font name="Consolas Bold" size="14.0" />
-      </font>
-   </Button>
+   <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="42.0" layoutY="277.0">
+      <image>
+         <Image url="@images/icons8_Search_52px.png" />
+      </image>
+   </ImageView>
+   <ImageView layoutX="39.0" layoutY="495.0">
+      <image>
+         <Image url="@images/Signout-icon.png" />
+      </image>
+   </ImageView>
+   <ImageView layoutX="39.0" layoutY="328.0">
+      <image>
+         <Image url="@images/icons8_Box_32px.png" />
+      </image>
+   </ImageView>
+   <ImageView fitHeight="123.0" fitWidth="200.0" layoutX="8.0" layoutY="14.0">
+      <image>
+         <Image url="@images/whiteadmin.png" />
+      </image>
+   </ImageView>
 </AnchorPane>

@@ -1,13 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane styleClass="PageBackgroundColor" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AdminCasesController">
+<AnchorPane prefHeight="676.0" prefWidth="726.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" styleClass="Dashboardbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AdminCasesController">
+   <AnchorPane layoutX="20.0" layoutY="196.0" prefHeight="192.0" prefWidth="690.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" styleClass="DashboardSideBarColor" stylesheets="@style.css" />
 
-    <ListView fx:id="casesListView"
-              layoutX="20" layoutY="20"
-              prefWidth="693" prefHeight="648"
-              styleClass="list-view"/>
+    <ListView fx:id="casesListView" layoutX="20" layoutY="236.0" prefHeight="419.0" prefWidth="690.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" styleClass="list-view" />
+   <Text fill="WHITE" layoutX="94.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Case Title">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Text>
+   <Text fill="WHITE" layoutX="260.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Text>
+   <Text fill="WHITE" layoutX="423.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Posted At">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Text>
+   <Text fill="WHITE" layoutX="582.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Actions">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Text>
+   <AnchorPane fx:id="statsPane"
+               layoutX="20.0" layoutY="20.0"
+               prefHeight="150.0" prefWidth="690.0"
+               style="-fx-background-radius: 15; -fx-border-radius: 15;"
+               styleClass="DashboardSideBarColor"
+               stylesheets="@style.css">
+      <children>
+         <Label fx:id="totalCasesLabel"
+                layoutX="90.0" layoutY="50.0"
+                text="0"
+                font="Consolas Bold 24"
+                style="-fx-text-fill: white;" />
+         <Label fx:id="claimedCasesLabel"
+                layoutX="317.0" layoutY="50.0"
+                text="0"
+                font="Consolas Bold 24"
+                style="-fx-text-fill: #28a745;" />
+         <Label fx:id="resolvedCasesLabel"
+                layoutX="547.0" layoutY="50.0"
+                text="0"
+                font="Consolas Bold 24"
+                style="-fx-text-fill: #fd7e14;" />
+      </children>
+   </AnchorPane>
 
 </AnchorPane>

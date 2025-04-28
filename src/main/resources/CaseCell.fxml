@@ -7,7 +7,7 @@
       xmlns:fx="http://javafx.com/fxml/1"
       styleClass="case-item"
       spacing="5"
-      prefWidth="700"
+      prefWidth="650"
       prefHeight="80">
 
     <HBox spacing="10" alignment="CENTER_LEFT">

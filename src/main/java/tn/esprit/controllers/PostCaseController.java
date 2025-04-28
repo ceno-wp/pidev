@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import tn.esprit.models.Case;
 import tn.esprit.services.CaseService;
 import javafx.fxml.FXML;
+import tn.esprit.controllers.ManageUserController;
+import tn.esprit.utils.SessionManager;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,20 +24,38 @@ public class PostCaseController {
 
     private CaseService caseService = new CaseService();
 
+    private ManageUserController.User currentUser;
+
     @FXML
     public void initialize() {
-        // Populate dropdowns
+        // Check authentication and authorization
+        currentUser = SessionManager.getCurrentUser();
+
+        if (currentUser == null) {
+            showErrorAndRedirect("Authentication Required", "Please login first");
+            return;
+        }
+
+        if (!currentUser.getRole().toUpperCase().contains("ROLE_CLIENT")) {
+            showErrorAndRedirect("Access Denied", "Only clients can post cases");
+            return;
+        }
+
+        // Initialize form if authorized
         typeDropdown.getItems().addAll("CIVIL", "CRIMINAL", "FAMILY", "IMMIGRATION");
         visibilityDropdown.getItems().addAll("PUBLIC", "UNLISTED");
     }
 
     @FXML
     private void handleSubmit() {
-        // Hardcoded user ID for testing (replace later)
-        int userId = 1;
+        // Validate user is still authenticated
+        if (currentUser == null || !currentUser.getRole().toUpperCase().contains("ROLE_CLIENT")) {
+            showErrorAlert(List.of("Session expired or insufficient privileges"));
+            return;
+        }
 
         Case newCase = new Case(
-                userId,
+                currentUser.getId(), // Use logged-in client's ID
                 titleField.getText().trim(),
                 locationField.getText().trim(),
                 typeDropdown.getValue(),
@@ -47,9 +67,7 @@ public class PostCaseController {
         List<String> errors = caseService.saveCase(newCase);
 
         if(errors.isEmpty()) {
-
             navigateToCasesPage();
-
         } else {
             showErrorAlert(errors);
         }
@@ -57,7 +75,7 @@ public class PostCaseController {
 
     private void navigateToCasesPage() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/Cases.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Cases2.fxml"));
             Stage stage = (Stage) titleField.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("All Cases");
@@ -82,11 +100,30 @@ public class PostCaseController {
         alert.showAndWait();
     }
 
+    private void redirectToHome() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/HomePage.fxml"));
+            Stage stage = (Stage) titleField.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Navigation Error", "Failed to redirect");
+        }
+    }
+
+    private void showErrorAndRedirect(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+        redirectToHome();
+    }
+
 
     @FXML
     private void handleBack() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/Cases.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Cases2.fxml"));
             Stage stage = (Stage) titleField.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (Exception e) {

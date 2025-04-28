@@ -10,14 +10,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="688" prefWidth="933" styleClass="SideBarColor" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.HomePageController">
+<AnchorPane prefHeight="687.0" prefWidth="941.0" styleClass="SideBarColor" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.HomePageController">
 
-    <ImageView fitHeight="106" fitWidth="200" layoutY="-1">
+    <ImageView fitHeight="106" fitWidth="200" layoutX="6.0">
         <image>
             <Image url="@images/LegalLink-NoBg.png" />
         </image>
     </ImageView>
-    <Button layoutY="257.0" mnemonicParsing="false" onAction="#handleDiscover" prefHeight="44.0" prefWidth="200.0" stylesheets="@style.css" text="Discover">
+    <Button layoutX="45.0" layoutY="269.0" mnemonicParsing="false" onAction="#handleDiscover" prefHeight="44.0" prefWidth="138.0" style="-fx-background-radius: 13; -fx-border-radius: 13;" stylesheets="@style.css" text="Discover">
         <styleClass>
             <String fx:value="SideBarColor" />
             <String fx:value="Navbar-back-button" />
@@ -26,38 +26,16 @@
             <Font name="Consolas" size="19.0" />
         </font>
     </Button>
-    <Button layoutX="-1.0" layoutY="104.0" mnemonicParsing="false" onAction="#handlePostCase" prefHeight="60.0" prefWidth="200.0" stylesheets="@style.css" text="+ Post a Case">
+    <Button layoutX="44.0" layoutY="154.0" mnemonicParsing="false" onAction="#handlePostCase" prefHeight="44.0" prefWidth="138.0" style="-fx-background-radius: 12; -fx-border-radius: 12;" stylesheets="@style.css" text="+ Post a Case">
         <styleClass>
             <String fx:value="SideBarColor" />
             <String fx:value="Navbar-back-button" />
         </styleClass>
         <font>
-            <Font name="Consolas" size="14.0" />
+            <Font name="Consolas" size="16.0" />
         </font>
     </Button>
-    <Button layoutY="336.0" mnemonicParsing="false" onAction="#handleCases" prefHeight="44.0" prefWidth="200.0" stylesheets="@style.css" text="Cases">
-        <styleClass>
-            <String fx:value="SideBarColor" />
-            <String fx:value="Navbar-back-button" />
-        </styleClass>
-        <font>
-            <Font name="Consolas" size="19.0" />
-        </font>
-    </Button>
-    <Line endX="-2.0000152587890625" layoutX="200.0" layoutY="105.0" startX="-200.0" />
-    <Line endX="-2.0000152587890625" layoutX="201.0" layoutY="164.0" startX="-200.0" />
-    <Button layoutY="598.0" mnemonicParsing="false" onAction="#handleSettings" prefHeight="60.0" prefWidth="200.0" stylesheets="@style.css" text="Settings">
-        <styleClass>
-            <String fx:value="SideBarColor" />
-            <String fx:value="Navbar-back-button" />
-        </styleClass>
-        <font>
-            <Font name="Consolas" size="14.0" />
-        </font>
-    </Button>
-    <Line endX="-2.0000152587890625" layoutX="201.0" layoutY="598.0" startX="-200.0" />
-    <Line endX="-2.0000152587890625" layoutX="201.0" layoutY="658.0" startX="-200.0" />
-    <Button layoutX="-1.0" layoutY="416.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="200.0" stylesheets="@style.css" text="idk">
+    <Button layoutX="45.0" layoutY="344.0" mnemonicParsing="false" onAction="#handleCases" prefHeight="44.0" prefWidth="138.0" style="-fx-background-radius: 13; -fx-border-radius: 13;" stylesheets="@style.css" text="Cases">
         <styleClass>
             <String fx:value="SideBarColor" />
             <String fx:value="Navbar-back-button" />
@@ -66,13 +44,32 @@
             <Font name="Consolas" size="19.0" />
         </font>
     </Button>
-   <ListView fx:id="listView" layoutX="199.0" prefHeight="688.0" prefWidth="738.0" />
-   <Text layoutX="386.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Legal Link !" wrappingWidth="363.20001220703125">
+    <Line endX="59.99998474121094" endY="7.62939453125E-6" layoutX="167.0" layoutY="104.0" startX="-166.00001525878906" />
+    <Button layoutX="45.0" layoutY="551.0" mnemonicParsing="false" onAction="#handleSettings" prefHeight="44.0" prefWidth="138.0" style="-fx-background-radius: 13; -fx-border-radius: 13;" stylesheets="@style.css" text="Settings">
+        <styleClass>
+            <String fx:value="SideBarColor" />
+            <String fx:value="Navbar-back-button" />
+        </styleClass>
+        <font>
+            <Font name="Consolas Bold" size="16.0" />
+        </font>
+    </Button>
+    <Button layoutX="45.0" layoutY="419.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="138.0" style="-fx-background-radius: 13; -fx-border-radius: 13;" stylesheets="@style.css" text="idk">
+        <styleClass>
+            <String fx:value="SideBarColor" />
+            <String fx:value="Navbar-back-button" />
+        </styleClass>
+        <font>
+            <Font name="Consolas" size="19.0" />
+        </font>
+    </Button>
+   <ListView fx:id="listView" layoutX="226.0" layoutY="20.0" prefHeight="650.0" prefWidth="690.0" style="-fx-background-radius: 13; -fx-border-radius: 13;" />
+   <Text layoutX="389.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Legal Link !" wrappingWidth="363.20001220703125">
       <font>
          <Font name="System Bold" size="30.0" />
       </font>
    </Text>
-   <ImageView fitHeight="53.0" fitWidth="92.0" layoutX="509.0" layoutY="14.0">
+   <ImageView fitHeight="44.0" fitWidth="67.0" layoutX="529.0" layoutY="20.0">
       <image>
          <Image url="@images/gold-link.png" />
       </image>

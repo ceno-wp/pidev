@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="688" prefWidth="933" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.CaseDetailsController">
 
-    <VBox layoutX="100.0" layoutY="105.0" prefWidth="733" spacing="20">
+    <VBox layoutX="61.0" layoutY="103.0" prefHeight="350.0" prefWidth="551.0" spacing="20">
 
         <!-- Case Title -->
         <Label fx:id="titleLabel" styleClass="case-title" wrapText="true" />
@@ -25,39 +25,10 @@
                     </ImageView>
                 </graphic>
             </Label>
-
-            <Label fx:id="locationLabel" styleClass="detail-label">
-                <graphic>
-                    <ImageView fitHeight="20" fitWidth="20">
-                        <Image url="@images/location-icon.png" />
-                    </ImageView>
-                </graphic>
-            </Label>
-
-            <Label fx:id="dateLabel" styleClass="detail-label">
-                <graphic>
-                    <ImageView fitHeight="20" fitWidth="20">
-                        <Image url="@images/date-icon.png" />
-                    </ImageView>
-                </graphic>
-            </Label>
         </HBox>
 
-        <Separator />
-
-        <!-- Description -->
-        <Label styleClass="section-title" text="Description:" />
+        <Separator prefHeight="24.0" prefWidth="480.0" />
         <Label fx:id="descriptionLabel" styleClass="description-text" wrapText="true" />
-
-        <!-- Contact Info -->
-        <Label styleClass="section-title" text="Contact Information:" />
-        <Label fx:id="phoneLabel" styleClass="detail-label">
-            <graphic>
-                <ImageView fitHeight="20" fitWidth="20">
-                    <Image url="@images/phone-icon.png" />
-                </ImageView>
-            </graphic>
-        </Label>
     </VBox>
      <!-- Back Button -->
      <Button layoutX="14.0" layoutY="17.0" onAction="#handleBack" prefHeight="24.0" prefWidth="94.0" styleClass="back-button" text="← Return" />
@@ -66,4 +37,44 @@
          <Image url="@images/LegalLink-Bg.png" />
       </image>
    </ImageView>
+   <VBox layoutX="653.0" layoutY="148.0" prefHeight="320.0" prefWidth="236.0">
+      <children>
+         <Label styleClass="section-title" text="Case Information:" />
+
+            <Label fx:id="dateLabel" styleClass="detail-label">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@images/date-icon.png" />
+                    </ImageView>
+                </graphic>
+            </Label>
+
+            <Label fx:id="locationLabel" styleClass="detail-label">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@images/location-icon.png" />
+                    </ImageView>
+                </graphic>
+            </Label>
+           <Label fx:id="phoneLabel" styleClass="detail-label">
+               <graphic>
+                   <ImageView fitHeight="20" fitWidth="20">
+                       <Image url="@images/phone-icon.png" />
+                   </ImageView>
+               </graphic>
+           </Label>
+         <HBox prefHeight="18.0" prefWidth="250.0">
+            <children>
+               <Button onAction="#handleClaim" prefHeight="24.0" prefWidth="94.0" styleClass="back-button" text="Claim" />
+               <Separator orientation="VERTICAL" prefHeight="46.0" prefWidth="66.0" />
+               <Button onAction="#handleMessage" prefHeight="24.0" prefWidth="88.0" styleClass="back-button" text="Message" />
+            </children>
+         </HBox>
+      </children>
+   </VBox>
+   <VBox layoutX="632.0" layoutY="147.0" prefHeight="330.0" prefWidth="20.0">
+      <children>
+         <Separator orientation="VERTICAL" prefHeight="342.0" prefWidth="2.0" />
+      </children>
+   </VBox>
 </AnchorPane>

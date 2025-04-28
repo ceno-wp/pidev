@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="634.0" prefWidth="702.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" styleClass="Dashboardbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ClientCasesController">
+   <AnchorPane layoutX="29.0" layoutY="72.0" prefHeight="118.0" prefWidth="643.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" styleClass="DashboardSideBarColor" stylesheets="@style.css">
+      <children>
+         <Text fill="WHITE" layoutX="31.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Case Title" wrappingWidth="108.2314453125">
+            <font>
+               <Font name="Consolas Bold" size="17.0" />
+            </font>
+         </Text>
+         <Text fill="WHITE" layoutX="165.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lawyer" wrappingWidth="89.03143310546875">
+            <font>
+               <Font name="Consolas Bold" size="17.0" />
+            </font>
+         </Text>
+         <Text fill="WHITE" layoutX="515.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Actions" wrappingWidth="89.03143310546875">
+            <font>
+               <Font name="Consolas Bold" size="17.0" />
+            </font>
+         </Text>
+      </children>
+   </AnchorPane>
+
+    <ListView fx:id="casesListView" layoutX="29.0" layoutY="131.0" prefHeight="451.0" prefWidth="643.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" styleClass="list-view" />
+   <Text fill="#000453" layoutX="53.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pending Claims" wrappingWidth="153.8314208984375">
+      <font>
+         <Font name="Consolas Bold" size="17.0" />
+      </font>
+   </Text>
+
+</AnchorPane>

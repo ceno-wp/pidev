@@ -16,12 +16,14 @@ import tn.esprit.services.CaseService;
 import javafx.scene.layout.VBox;  // Add this at the top
 import java.time.format.DateTimeFormatter;  // Add this for date formatting
 import java.io.IOException;
+import tn.esprit.controllers.ManageUserController;
+import tn.esprit.utils.SessionManager;
 
 public class HomePageController {
     @FXML private AnchorPane contentPane;
     @FXML
     private ListView<Case> listView;
-    private final CaseService caseService = new CaseService();
+
 
     @FXML
     private void handlePostCase() {
@@ -35,15 +37,59 @@ public class HomePageController {
 
     @FXML
     private void handleCases() {
-        loadPage("/Cases.fxml");
+        ManageUserController.User currentUser = SessionManager.getCurrentUser();
+
+        if (currentUser == null) {
+            showErrorAlert("Access Error", "No user logged in");
+            return;
+        }
+
+        // Check roles directly from the user's roles string
+        String roles = currentUser.getRole().toUpperCase();
+
+        if (roles.contains("ROLE_CLIENT")) {
+            loadPage("/Cases2.fxml");
+        } else if (roles.contains("ROLE_LAWYER")) {
+            loadPage("/Cases.fxml");
+        } else {
+            // Default to admin dashboard
+            loadPage("/Cases.fxml");
+        }
+
     }
+
 
 
 
     @FXML
     private void handleSettings() {
-        loadPage("/AdminDashboard.fxml");
+        ManageUserController.User currentUser = SessionManager.getCurrentUser();
+
+        if (currentUser == null) {
+            showErrorAlert("Access Error", "No user logged in");
+            return;
+        }
+
+        // Check roles directly from the user's roles string
+        String roles = currentUser.getRole().toUpperCase();
+
+        if (roles.contains("ROLE_CLIENT")) {
+            loadPage("/ClientDashboard.fxml");
+        } else if (roles.contains("ROLE_LAWYER")) {
+            loadPage("/LawyerDashboard.fxml");
+        } else {
+            // Default to admin dashboard
+            loadPage("/AdminDashboard.fxml");
+        }
+
+
+
     }
+
+    public void setCurrentUser(ManageUserController.User user) {
+        // You can use this user data if needed
+    }
+
 
 
     private void loadPage(String fxmlPath) {
@@ -56,8 +102,19 @@ public class HomePageController {
         }
     }
 
-    private void showErrorAlert(String navigationError, String s) {
+    private void showErrorAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
 
+    }
+
+    @FXML
+    private void handleSignout() {
+        SessionManager.logout();
+        loadPage("/login.fxml");
     }
 
 

@@ -16,7 +16,7 @@
     <left>
         <AnchorPane prefHeight="407.0" prefWidth="228.0" styleClass="SideBarColor" stylesheets="@style.css" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="106.0" fitWidth="200.0" layoutX="22.0" layoutY="146.0" fx:id="brandingImageView" >
+            <ImageView fitHeight="106.0" fitWidth="200.0" layoutX="22.0" layoutY="146.0">
                <image>
                   <Image url="@images/LegalLink-NoBg.png" />
                </image>

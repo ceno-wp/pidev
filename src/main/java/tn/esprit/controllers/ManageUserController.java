@@ -58,10 +58,10 @@ public class ManageUserController {
 
     private void loadUsersFromDatabase() {
         allUsers.clear();
-        String query = "SELECT id, name, email, phonenumber, roles FROM `user`"; // Added backticks around table name
+        String query = "SELECT id, name, email, phonenumber, roles FROM user";
 
-        try (Connection conn = MyDataBase.getInstance().getCnx(); // Use singleton instance
-             Statement stmt = conn.createStatement();
+        Connection conn = MyDataBase.getInstance().getCnx(); // Get connection without auto-close
+        try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
@@ -86,8 +86,7 @@ public class ManageUserController {
             statusLabel.setText("Loaded " + allUsers.size() + " users");
 
         } catch (SQLException e) {
-            showAlert("Database Error", "Failed to load users",
-                    "Error details: " + e.getErrorCode() + " - " + e.getMessage());
+            showAlert("Database Error", "Failed to load users", "Error: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -139,8 +138,8 @@ public class ManageUserController {
         if (confirmation.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK) {
             String query = "DELETE FROM user WHERE id = ?";
 
-            Connection conn = MyDataBase.getInstance().getCnx(); // Get singleton connection
-            try (PreparedStatement pstmt = conn.prepareStatement(query)) { // Only close the statement
+            Connection conn = MyDataBase.getInstance().getCnx();
+            try (PreparedStatement pstmt = conn.prepareStatement(query)) {
                 pstmt.setInt(1, selectedUser.getId());
                 int affectedRows = pstmt.executeUpdate();
 
@@ -210,6 +209,8 @@ public class ManageUserController {
         }
     }
 
+
+
     public static class User {
         private final int id;
         private final String name;
@@ -226,10 +227,40 @@ public class ManageUserController {
         }
 
         // Getters
+        public String getMainRole() {
+            if (this.role.contains("ROLE_ADMIN")) return "ADMIN";
+            if (this.role.contains("ROLE_LAWYER")) return "LAWYER";
+            return "CLIENT"; // Default
+        }
         public int getId() { return id; }
         public String getName() { return name; }
         public String getEmail() { return email; }
         public String getPhoneNumber() { return phoneNumber; }
         public String getRole() { return role; }
+        public static User findById(int userId) {
+            String sql = "SELECT id, name, email, phonenumber, roles FROM user WHERE id = ?";
+            try (Connection cnx = MyDataBase.getInstance().getCnx();
+                 PreparedStatement ps = cnx.prepareStatement(sql)) {
+
+                ps.setInt(1, userId);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        return new User(
+                                rs.getInt("id"),
+                                rs.getString("name"),
+                                rs.getString("email"),
+                                rs.getString("phonenumber"), // matches your column
+                                rs.getString("roles")        // e.g. '["ROLE_LAWYER"]'
+                        );
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+
     }
 }

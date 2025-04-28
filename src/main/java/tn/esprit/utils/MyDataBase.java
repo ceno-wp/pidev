@@ -35,6 +35,13 @@ public class MyDataBase {
     }
 
     public Connection getCnx() {
+        try {
+            if (cnx == null || cnx.isClosed()) {
+                cnx = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error reconnecting to database", e);
+        }
         return cnx;
     }
 }

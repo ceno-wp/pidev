@@ -2,16 +2,25 @@
     -fx-background-color: linear-gradient( to right top,#facd68, #b99a45);
 }
 
+.White {
+    -fx-background-color: #ffffff;
+}
+
+
 .PageBackgroundColor{
-    -fx-background-color: #e8e8e8;
+    -fx-background-color: #fff8ee;
 }
 
 .SideBarColor{
-    -fx-background-color: #f7e8d3;
+    -fx-background-color: #F3E9D2;
 }
 
 .DashboardSideBarColor{
-    -fx-background-color: #00204A;
+    -fx-background-color: #00204a;
+}
+
+.Dashboardbackground{
+    -fx-background-color: #cddef4;
 }
 
 .list-cell {
@@ -21,9 +30,16 @@
     -fx-padding: 10;
 }
 
+.list-cell:filled {
+    -fx-background-color: #ffffff !important;
+    -fx-background-insets: 0 !important;
+}
+
+
 .list-cell:filled:hover {
-    -fx-background-color: #f5f5f5;
+    -fx-background-color: #ffffff;
     -fx-cursor: hand;
+    -fx-background-insets: 0 !important;
 }
 
 .list-cell:empty {
@@ -101,13 +117,15 @@
 }
 
 .back-button:hover {
-    -fx-background-color: #58b7da;
+    -fx-background-color: #faac44;
 }
 
 .Navbar-back-button:hover {
     -fx-background-color: #facd68;
     -fx-cursor: hand;
 }
+
+
 
 .Admin-Navbar-back-button:hover {
     -fx-background-color: #f1580c;
@@ -247,4 +265,74 @@
 .case-detail {
     -fx-font-size: 12px;
     -fx-text-fill: -fx-secondary;
+}
+
+.success-button {
+    -fx-background-color: #28a745;
+    -fx-text-fill: white;
+}
+
+.danger-button {
+    -fx-background-color: #dc3545;
+    -fx-text-fill: white;
+}
+
+.list-view .hbox {
+    -fx-spacing: 10;
+    -fx-padding: 5;
+}
+
+.list-view .label {
+    -fx-font-size: 14;
+}
+
+
+.chat-header {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+    -fx-background-color: #2A5058;
+    -fx-text-fill: white;
+}
+
+.chat-list-view {
+    -fx-background-color: transparent;
+}
+
+.send-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-padding: 5px 15px;
+}
+
+/* Message container */
+#messageContainer {
+    -fx-background-color: #f0f2f5;
+    -fx-padding: 10 15 10 15;
+    -fx-spacing: 8;
+}
+
+/* Sent messages (right side) */
+.sent-message .text-flow {
+    -fx-background-color: #0084ff;
+    -fx-background-radius: 15 15 0 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 5, 0, 1, 1);
+}
+
+/* Received messages (left side) */
+.received-message .text-flow {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15 15 15 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 5, 0, 1, 1);
+}
+
+/* Text styling */
+.sent-message .text {
+    -fx-fill: white;
+    -fx-font-size: 14;
+}
+
+.received-message .text {
+    -fx-fill: #050505;
+    -fx-font-size: 14;
 }

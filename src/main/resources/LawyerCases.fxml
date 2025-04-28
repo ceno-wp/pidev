@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="634.0" prefWidth="702.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" styleClass="Dashboardbackground" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.LawyerCasesController">
+
+    <ListView fx:id="casesListView" layoutX="29.0" layoutY="38.0" prefHeight="544.0" prefWidth="643.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" styleClass="list-view" />
+
+</AnchorPane>
