@@ -14,6 +14,7 @@ import tn.esprit.utils.MailService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class AjouterAppointment {
 
@@ -26,7 +27,7 @@ public class AjouterAppointment {
 
     @FXML
     public void initialize() {
-        time_periodCombo.getItems().addAll("Morning", "Noon", "Evening");
+        time_periodCombo.getItems().addAll("Morning(from 9:00 to 12:00)", "Noon(from 13:00 to 16:00)", "Evening(from 16:30 to 19:00)");
         // REMOVE this line below 👇
         // time_periodCombo.setValue(time_periodCombo.getItems().get(0));
 
@@ -64,11 +65,15 @@ public class AjouterAppointment {
 
         try {
             LocalDate date = datePicker.getValue();
-            LocalDateTime dateTime = date.atStartOfDay();
+            LocalDateTime dateTime = date.atStartOfDay().plusMinutes(getTimeSlotOffset(time_periodCombo.getValue()));
 
             // Check if an appointment already exists at the selected date and time
-            if (new ServiceAppointment().isAppointmentExists(dateTime)) {
-                showAlert(Alert.AlertType.ERROR, "Time Slot Unavailable", "An appointment already exists at this time.");
+            List<Appointment> conflicts = serviceAppointment.getConflictingAppointments(dateTime);
+            if (!conflicts.isEmpty()) {
+                // Suggest an alternative time slot
+                LocalDateTime alternativeTime = serviceAppointment.suggestAlternativeTimeSlot(dateTime);
+                showAlert(Alert.AlertType.INFORMATION, "Time Slot Unavailable",
+                        "An appointment already exists at this time. Suggested time: " + alternativeTime);
                 return;
             }
 
@@ -94,6 +99,17 @@ public class AjouterAppointment {
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to add appointment: " + e.getMessage());
         }
     }
+
+    // Helper method to get time slot offset
+    private long getTimeSlotOffset(String timePeriod) {
+        switch (timePeriod) {
+            case "Morning(from 9:00 to 12:00)": return 9 * 60;  // 9 AM
+            case "Noon(from 13:00 to 16:00)": return 13 * 60; // 1 PM
+            case "Evening(from 16:30 to 19:00)": return 16 * 60 + 30; // 4:30 PM
+            default: return 0;
+        }
+    }
+
 
 
 

@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -14,7 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import tn.esprit.models.Appointment;
 import tn.esprit.services.ServiceAppointment;
-import tn.esprit.controllers.EditAppointment; // import your edit controller
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -32,11 +32,9 @@ public class AfficherAppointment {
 
     @FXML
     public void initialize() {
-        // Load all appointments
         allAppointments.addAll(service.getAll());
         display.setItems(allAppointments);
 
-        // Listeners for filters
         idField.textProperty().addListener((obs, o, n) -> applyFilters());
         dateFilter.valueProperty().addListener((obs, o, n) -> applyFilters());
         keywordField.textProperty().addListener((obs, o, n) -> applyFilters());
@@ -49,19 +47,10 @@ public class AfficherAppointment {
 
         var filtered = allAppointments.stream()
                 .filter(app -> {
-                    // 1) ID filter
-                    if (!idText.isEmpty() && !String.valueOf(app.getId()).equals(idText)) {
-                        return false;
-                    }
-                    // 2) Date filter
-                    if (date != null && !app.getDate().toLocalDate().equals(date)) {
-                        return false;
-                    }
-                    // 3) Keyword filter
+                    if (!idText.isEmpty() && !String.valueOf(app.getId()).equals(idText)) return false;
+                    if (date != null && !app.getDate().toLocalDate().equals(date)) return false;
                     if (!kw.isEmpty() && !app.getDescription().toLowerCase().contains(kw)
-                            && !app.getTime_period().toLowerCase().contains(kw)) {
-                        return false;
-                    }
+                            && !app.getTime_period().toLowerCase().contains(kw)) return false;
                     return true;
                 })
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
@@ -89,12 +78,10 @@ public class AfficherAppointment {
             return;
         }
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/EditAppointment.fxml")
-            );
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditAppointment.fxml"));
             Parent root = loader.load();
             EditAppointment ctrl = loader.getController();
-            ctrl.setAppointmentToEdit(sel); // use the correct setter
+            ctrl.setAppointmentToEdit(sel);
 
             Stage s = new Stage();
             s.setScene(new Scene(root));
@@ -106,8 +93,17 @@ public class AfficherAppointment {
         }
     }
 
+    @FXML
+    private void goToStatistics(ActionEvent event) throws IOException {
+        Parent statisticsView = FXMLLoader.load(getClass().getResource("/StatisticsView.fxml"));
+        Scene scene = new Scene(statisticsView);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
     private void showAlert(String msg) {
-        var alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(msg);
         alert.showAndWait();
     }

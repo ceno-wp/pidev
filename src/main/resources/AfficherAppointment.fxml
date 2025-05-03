@@ -4,9 +4,21 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.*?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.controllers.AfficherAppointment"
             prefWidth="600" prefHeight="450" stylesheets="@style.css" styleClass="PageBackgroundColor">
+
     <children>
+
+        <!-- Icon button in the top-right corner -->
+
+
+
+
+
+
+
         <VBox spacing="15" alignment="TOP_CENTER"
               AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
 
@@ -22,6 +34,19 @@
             <HBox spacing="15" alignment="CENTER">
                 <Button text="Edit" onAction="#edit" styleClass="action-button"/>
                 <Button text="Delete" onAction="#delete" styleClass="action-button"/>
+                <Button fx:id="statsButton"
+                        onAction="#goToStatistics"
+                        prefWidth="50" prefHeight="50"
+                        style="-fx-background-color: transparent;"
+                        AnchorPane.bottomAnchor="10" AnchorPane.rightAnchor="10">
+                    <graphic>
+                        <ImageView fitHeight="40" fitWidth="40">
+                            <image>
+                                <Image url="@images/chart_icon.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
             </HBox>
         </VBox>
     </children>

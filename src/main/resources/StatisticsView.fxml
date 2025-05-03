@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.controllers.StatisticsController"
+            prefWidth="600" prefHeight="400">
+    <children>
+        <VBox spacing="20" alignment="CENTER" AnchorPane.topAnchor="50" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50">
+            <Label text="Appointment Statistics" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+            <!-- Pie chart to display statistics -->
+            <PieChart fx:id="statsChart">
+                <!-- Data will be added dynamically from the controller -->
+            </PieChart>
+        </VBox>
+    </children>
+</AnchorPane>

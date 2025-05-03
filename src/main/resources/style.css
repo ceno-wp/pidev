@@ -194,3 +194,8 @@
     -fx-text-fill: white;
     -fx-font-size: 14px;
 }
+#statsButton:hover {
+    -fx-opacity: 0.8;
+    -fx-cursor: hand;
+}
+
