@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.controllers.AjouterPayment" stylesheets="@style.css">
+    <children>
+        <VBox spacing="20" alignment="CENTER" padding="20">
+            <!-- Appointment ID Field -->
+            <TextField fx:id="appointmentIdField" promptText="Enter Appointment ID" />
+
+            <!-- Amount Field -->
+            <TextField fx:id="amountField" promptText="Enter Amount" />
+
+            <!-- Payment Status ComboBox -->
+            <ComboBox fx:id="paymentStatusCombo" promptText="Select Payment Status" />
+
+            <!-- Payment Method ComboBox -->
+            <ComboBox fx:id="paymentMethodCombo" promptText="Select Payment Method" />
+
+            <!-- Payment Date Picker -->
+            <DatePicker fx:id="paymentDatePicker" promptText="Select Payment Date" />
+
+            <!-- Save Button -->
+            <Button text="Save Payment" onAction="#savePayment" />
+        </VBox>
+    </children>
+</AnchorPane>

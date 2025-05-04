@@ -29,15 +29,13 @@ public class ClientClaimsController {
     }
 
     private void loadClaims() {
-        if (SessionManager.getCurrentUser() == null) {
-            System.out.println("No user in session");
-            return;
-        }
+        if (SessionManager.getCurrentUser() == null) return;
+
         int clientId = SessionManager.getCurrentUser().getId();
         try {
-            claimsListView.getItems().setAll(
-                    claimService.getPendingClaims(clientId)
-            );
+            // Clear and reload the list
+            claimsListView.getItems().clear();
+            claimsListView.getItems().addAll(claimService.getPendingClaims(clientId));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -108,26 +106,37 @@ public class ClientClaimsController {
             private void handleAccept() {
                 Claim claim = getItem();
                 if (claim == null) return;
+
                 try {
+                    // Update claim first
                     claimService.updateClaimStatus(claim.getId(), "ACCEPTED");
+
+                    // Then update case
                     caseService.updateCaseClaimStatus(
                             claim.getCaseId(),
                             claim.getLawyerId(),
                             "ACCEPTED",
                             LocalDateTime.now()
                     );
-                    loadClaims();
+
                 } catch (Exception e) {
                     e.printStackTrace();
+                } finally {
+                    // Always remove from UI regardless of success
+                    claimsListView.getItems().remove(claim);
                 }
             }
 
             private void handleReject() {
                 Claim claim = getItem();
                 if (claim == null) return;
+
                 try {
                     claimService.updateClaimStatus(claim.getId(), "REJECTED");
-                    loadClaims();
+
+                    // Immediate UI update
+                    claimsListView.getItems().remove(claim);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

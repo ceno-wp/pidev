@@ -5,6 +5,7 @@ import tn.esprit.models.Claim;
 import tn.esprit.utils.MyDataBase;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,15 +60,41 @@ public class ClaimService {
         return claims;
     }
 
-    public void updateClaimStatus(int claimId, String status) throws SQLException {
+    public void updateClaimStatus(int claimId, String status) {
         String query = "UPDATE claim SET status = ? WHERE id = ?";
 
-        try (Connection conn = getCnx();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection connection = MyDataBase.getInstance().getCnx();
+             PreparedStatement pst = connection.prepareStatement(query)) {
 
-            stmt.setString(1, status);
-            stmt.setInt(2, claimId);
-            stmt.executeUpdate();
+            pst.setString(1, status);
+            pst.setInt(2, claimId);
+            pst.executeUpdate();
+            connection.commit(); // Explicit commit
+        } catch (SQLException e) {
+            System.err.println("Update failed: " + e.getMessage());
+            try {
+                MyDataBase.getInstance().getCnx().rollback();
+            } catch (SQLException ex) {
+                System.err.println("Rollback failed: " + ex.getMessage());
+            }
+        }
+    }
+
+    public void updateCaseClaimStatus(int caseId, int lawyerId, String status, LocalDateTime date) {
+        String query = "UPDATE cases SET lawyer_id = ?, claim_status = ?, claim_decision_date = ? WHERE id = ?";
+
+        try {
+            // Get fresh connection for this operation
+            Connection connection = MyDataBase.getInstance().getCnx();
+            try (PreparedStatement pst = connection.prepareStatement(query)) {
+                pst.setInt(1, lawyerId);
+                pst.setString(2, status);
+                pst.setTimestamp(3, Timestamp.valueOf(date));
+                pst.setInt(4, caseId);
+                pst.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to update case", e);
         }
     }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controllers.EditAppointment"
+            stylesheets="@style.css"
+            prefWidth="400" prefHeight="400"
+            styleClass="PageBackgroundColor">
+
+    <children>
+        <VBox spacing="10" layoutX="50" layoutY="30">
+
+            <!-- DatePicker is now enabled -->
+            <DatePicker fx:id="datePicker" promptText="Select Date"/>
+
+            <!-- Removed manual TimeField -->
+
+            <ComboBox fx:id="time_periodCombo" promptText="Select Time Period">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Morning"/>
+                        <String fx:value="Noon"/>
+                        <String fx:value="Evening"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <TextArea fx:id="descriptionArea" promptText="Description" prefRowCount="4"/>
+
+            <!-- Colored Save Button -->
+            <Button text="Save" onAction="#save" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"/>
+
+        </VBox>
+    </children>
+</AnchorPane>

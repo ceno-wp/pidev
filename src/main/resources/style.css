@@ -336,3 +336,144 @@
     -fx-fill: #050505;
     -fx-font-size: 14;
 }
+
+.root-dark {
+    -fx-primary: #ffb86c;     /* Muted orange */
+    -fx-secondary: #8be9fd;   /* Cyan */
+    -fx-accent1: #ff79c6;     /* Pink */
+    -fx-accent2: #ff5555;     /* Red */
+    -fx-background: #282a36;  /* Main dark background */
+    -fx-light: #44475a;       /* Secondary gray */
+}
+
+.PageBackgroundColor-dark {
+    -fx-background-color: #282a36;
+}
+
+.SideBarColor-dark,
+.DashboardSideBarColor-dark {
+    -fx-background-color: #343746;
+}
+
+.section-title-dark {
+    -fx-font-size: 18px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #f8f8f2;
+}
+
+.case-title-dark {
+    -fx-font-size: 20px;
+}
+
+.detail-label-dark,
+.case-detail-dark {
+    -fx-text-fill: #bdc1d4;
+}
+
+.description-text-dark {
+    -fx-text-fill: #3b3e4d;
+}
+
+.form-control-dark,
+.form-textarea-dark,
+.form-combobox-dark,
+.custom-textarea-dark {
+    -fx-background-color: #3b3e4d;
+    -fx-border-color: #505368;
+    -fx-text-fill: #f8f8f2;
+    -fx-prompt-text-fill: #8be9fd;
+}
+
+.form-textarea-dark {
+    -fx-min-height: 100px;
+}
+
+.combo-box-popup-dark .list-view .list-cell {
+    -fx-background-color: #3b3e4d;
+}
+
+.combo-box-popup-dark .list-view .list-cell:filled:hover {
+    -fx-background-color: #505368;
+}
+
+.combo-box-dark .arrow {
+    -fx-background-color: #505368;
+}
+
+.action-button-dark {
+    -fx-background-color: linear-gradient(to bottom, #b89442, #8c6d31);
+}
+
+.list-view-dark {
+    -fx-border-color: -fx-light;
+}
+
+.list-cell-dark {
+    -fx-text-fill: #f8f8f2;
+}
+
+.case-item-dark {
+    -fx-background-color: #44475a;
+}
+
+.separator-dark {
+    -fx-border-color: #505368;
+}
+
+.icon-dark {
+    -fx-text-fill: #8be9fd;
+}
+
+.custom-listview-dark .list-cell {
+    -fx-background-color: transparent;
+}
+
+.combo-box-dark {
+    -fx-background-color: #44475a;
+    -fx-border-color: #7289da;
+}
+
+/* ===== NEW STYLES WITHOUT CONFLICTS (added as-is) ===== */
+.form-control-dark:focused,
+.form-textarea-dark:focused,
+.form-combobox-dark:focused {
+    -fx-border-color: #7289da;
+}
+
+.custom-textarea-dark .content {
+    -fx-background-color: #3b3e4d;
+}
+
+.action-button-dark:hover {
+    -fx-background-color: #a07e38;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0, 2, 2);
+}
+
+.list-cell-dark:filled:hover {
+    -fx-background-color: #505368;
+}
+
+.case-item-dark:hover {
+    -fx-background-color: #505368;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0, 2, 2);
+}
+
+.custom-listview-dark .list-cell:filled:hover {
+    -fx-background-color: #505368;
+}
+
+.form-textarea-dark {
+    -fx-control-inner-background: white;
+    -fx-text-fill: black;
+    -fx-prompt-text-fill: #888888;
+    -fx-highlight-fill: lightgray;
+}
+
+.combo-box-dark .list-cell {
+    -fx-text-fill: white;
+}
+
+#statsButton:hover {
+    -fx-opacity: 0.8;
+    -fx-cursor: hand;
+}

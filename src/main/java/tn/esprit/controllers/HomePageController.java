@@ -86,9 +86,30 @@ public class HomePageController {
 
     }
 
+    @FXML
+    private void handleAppointment() {
+        try {
+            // Load the FXML file
+            Parent root = FXMLLoader.load(getClass().getResource("/AjouterAppointment.fxml"));
+
+            // Create new stage (window)
+            Stage appointmentStage = new Stage();
+            appointmentStage.setTitle("Ajouter Appointment");
+            appointmentStage.setScene(new Scene(root));
+
+            // Show the new window without closing the current one
+            appointmentStage.show();
+
+        } catch (IOException e) {
+            showErrorAlert("Navigation Error", "Failed to open appointment window: " + e.getMessage());
+        }
+    }
+
     public void setCurrentUser(ManageUserController.User user) {
         // You can use this user data if needed
     }
+
+
 
 
 
@@ -101,6 +122,8 @@ public class HomePageController {
             showErrorAlert("Navigation Error", "Failed to load page: " + fxmlPath);
         }
     }
+
+
 
     private void showErrorAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            fx:controller="tn.esprit.controllers.AjouterAppointment"
+            prefWidth="600.0" prefHeight="500.0"
+            stylesheets="@style.css"
+            styleClass="PageBackgroundColor-dark">
+
+   <children>
+
+      <VBox alignment="CENTER" spacing="30"
+            AnchorPane.topAnchor="20" AnchorPane.bottomAnchor="20"
+            AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+
+         <!-- Title -->
+         <Label text="LegalLink Appointment" styleClass="case-title-dark"/>
+
+         <!-- Form Grid -->
+         <GridPane hgap="15" vgap="20">
+            <columnConstraints>
+               <ColumnConstraints percentWidth="35"/>
+               <ColumnConstraints percentWidth="65"/>
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints minHeight="40"/>
+               <RowConstraints minHeight="90"/>
+               <RowConstraints minHeight="40"/>
+               <RowConstraints minHeight="40"/> <!-- Added for Email -->
+            </rowConstraints>
+
+            <!-- Date -->
+            <Label text="📅 Appointment Date:" styleClass="detail-label-dark" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <DatePicker fx:id="datePicker"
+                        GridPane.rowIndex="0" GridPane.columnIndex="1"
+                        styleClass="form-control-dark"
+                        editable="false" />
+
+            <!-- Description -->
+            <Label text="📝 Case Description:" styleClass="detail-label-dark" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextArea fx:id="descriptionArea"
+                      prefHeight="90"
+                      styleClass="form-textarea-dark"
+                      GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <!-- Time Slot -->
+            <Label text="⏰ Time Slot:" styleClass="detail-label-dark" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="time_periodCombo"
+                      promptText="Select time slot"
+                      styleClass="form-combobox-dark"
+                      GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <!-- Email -->
+            <Label text="📧 Your Email:" styleClass="detail-label-dark" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                     <TextField fx:id="emailField"
+                       promptText="Enter your email..."
+                       styleClass="form-control-dark"
+                       GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+         </GridPane>
+
+         <!-- Buttons -->
+         <HBox spacing="30" alignment="CENTER">
+            <Button text="Display" onAction="#display" styleClass="action-button-dark"/>
+            <Button text="Save Appointment" onAction="#saveButton" styleClass="action-button-dark"/>
+         </HBox>
+
+      </VBox>
+
+   </children>
+</AnchorPane>
