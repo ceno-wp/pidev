@@ -10,23 +10,39 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import tn.esprit.models.Case;
 import tn.esprit.services.CaseService;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class AdminCasesController {
+    public AnchorPane statsPane;
     @FXML private ListView<Case> casesListView;
     private final CaseService caseService = new CaseService();
+    @FXML private Label totalCasesLabel;
+    @FXML private Label claimedCasesLabel;   
+    @FXML private Label resolvedCasesLabel;
 
 
     @FXML
     public void initialize() {
         casesListView.setItems(caseService.getCasesObservable());
         casesListView.setCellFactory(param -> new AdminCaseCell());
+        updateStats();
     }
+
+    private void updateStats() {
+        totalCasesLabel.setText(String.valueOf(caseService.getTotalCasesCount()));
+        claimedCasesLabel.setText(String.valueOf(caseService.getClaimedCasesCount()));
+        resolvedCasesLabel.setText(String.valueOf(caseService.getResolvedCasesCount()));
+    }
+
+    // Update the deleteCase method to refresh stats
+
 
     private class AdminCaseCell extends ListCell<Case> {
         private final HBox container = new HBox(15);
@@ -61,7 +77,9 @@ public class AdminCasesController {
             statusBtn.setOnAction(e -> updateStatus());
             visibilityBtn.setOnAction(e -> updateVisibility());
             deleteBtn.setOnAction(e -> deleteCase());
+
         }
+
 
         @Override
         protected void updateItem(Case caseObj, boolean empty) {
@@ -87,9 +105,25 @@ public class AdminCasesController {
                 case "closed" -> "open";
                 default -> "open";
             };
+
+            LocalDateTime resolvedAt = newStatus.equals("closed") ? LocalDateTime.now() : null;
+            Integer claimedById = null;
+            try {
+                if (c.getClaimed_by_id() != null && !c.getClaimed_by_id().isEmpty()) {
+                    claimedById = Integer.parseInt(c.getClaimed_by_id());
+                }
+            } catch (NumberFormatException e) {
+                System.err.println("Invalid claimed_by_id format: " + c.getClaimed_by_id());
+            }
+
+            // Update case status and resolution time
+
+
             caseService.updateStatus(c.getId(), newStatus);
             c.setStatus(newStatus);
+            c.setResolvedAt(resolvedAt);
             statusBtn.setText(newStatus);
+            updateStats();
         }
 
         private void updateVisibility() {
@@ -104,6 +138,7 @@ public class AdminCasesController {
             Case c = getItem();
             caseService.deleteCase(c.getId());
             casesListView.getItems().remove(c);
+            updateStats();
         }
     }
 }

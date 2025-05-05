@@ -7,39 +7,51 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane prefHeight="688" prefWidth="933" styleClass="White" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ChatController">
     <center>
-        <SplitPane dividerPositions="0.3">
+        <SplitPane dividerPositions="0.3" styleClass="SideBarColor" stylesheets="@style.css">
             <items>
                 <!-- Left side: Chat List -->
-                <VBox spacing="10" styleClass="SideBarColor" stylesheets="@style.css">
-                    <Label prefHeight="58.0" prefWidth="156.0" style="-fx-background-radius: 15; -fx-background-radius: 15;" styleClass="ButtoncolorBackground" stylesheets="@style.css" text=" Conversations">
-                  <font>
-                     <Font name="Consolas Bold" size="19.0" />
-                  </font>
+                <VBox spacing="10" styleClass="chat-list-view" stylesheets="@style.css">
+               <ImageView fitHeight="92.0" fitWidth="178.0">
+                  <image>
+                     <Image url="@images/LegalLink-NoBg.png" />
+                  </image>
                   <VBox.margin>
-                     <Insets left="50.0" />
-                  </VBox.margin></Label>
-                    <ListView fx:id="chatList" styleClass="SideBarColor" stylesheets="@style.css" />
+                     <Insets left="35.0" />
+                  </VBox.margin>
+               </ImageView>
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Your Conversations:" wrappingWidth="184.84530639648438">
+                  <font>
+                     <Font name="Corbel Bold" size="18.0" />
+                  </font>
+               </Text>
+                    <ListView fx:id="chatList" prefHeight="510.0" prefWidth="254.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" styleClass="White" stylesheets="@style.css" />
                 </VBox>
 
                 <!-- Right side: Chat Area -->
                 <VBox spacing="10" stylesheets="@style.css">
-                    <Label fx:id="chatPartnerLabel" prefHeight="69.0" prefWidth="650.0" styleClass="ButtoncolorBackground" />
-                    <ScrollPane fx:id="messageScroll" fitToWidth="true" prefHeight="562.0" prefWidth="636.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" styleClass="White" stylesheets="@style.css" vvalue="1.0">
-                        <VBox fx:id="messageContainer" spacing="8" styleClass="message-container">
+                    <Label fx:id="chatPartnerLabel" alignment="CENTER" prefHeight="94.0" prefWidth="650.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" styleClass="chat-list-view" stylesheets="@style.css">
+                  <font>
+                     <Font name="Consolas" size="16.0" />
+                  </font></Label>
+                    <ScrollPane fx:id="messageScroll" fitToWidth="true" prefHeight="549.0" prefWidth="650.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" styleClass="chat-scroll-pane" stylesheets="@style.css" vvalue="1.0">
+                        <VBox fx:id="messageContainer" spacing="8" styleClass="chat-scroll-pane" stylesheets="@style.css">
                             <padding>
-                                <Insets bottom="10" left="15" right="15" top="10"/>
+                                <Insets bottom="10" left="15" right="15" top="10" />
                             </padding>
                         </VBox>
                     </ScrollPane>
                     <HBox spacing="10">
-                        <TextField fx:id="messageInput" promptText="Type your message..." HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="messageInput" prefHeight="26.0" prefWidth="564.0" promptText="Type your message..." HBox.hgrow="ALWAYS" />
                         <Button onAction="#handleSendMessage" styleClass="send-button" stylesheets="@style.css" text="Send" />
                     </HBox>
                 </VBox>

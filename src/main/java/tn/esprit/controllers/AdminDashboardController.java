@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 import tn.esprit.models.Case;
 import tn.esprit.services.CaseService;
 import javafx.scene.layout.VBox;  // Add this at the top
+import tn.esprit.utils.SessionManager;
+
 import java.time.format.DateTimeFormatter;  // Add this for date formatting
 import java.io.IOException;
 
@@ -24,6 +26,7 @@ public class AdminDashboardController {
     @FXML private AnchorPane contentPane;
     @FXML private BarChart<String, Number> typeChart;
     private final CaseService caseService = new CaseService();
+
 
 
     @FXML
@@ -105,13 +108,19 @@ public class AdminDashboardController {
             Parent casesView = loader.load();
             contentPane.getChildren().setAll(casesView);
         } catch (IOException e) {
-            showErrorAlert("Navigation Error", "Failed to load cases view");
+            showErrorAlert("Navigation Error", "Failed to load manage users");
         }
     }
 
     @FXML
     private void handleBack() {
         loadPage("/HomePage.fxml");  // Replace with your actual home page FXML
+    }
+
+    @FXML
+    private void handleSignOut() {
+        SessionManager.logout();
+        loadPage("/login.fxml");
     }
 
 

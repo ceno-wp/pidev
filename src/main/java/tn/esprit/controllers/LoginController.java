@@ -1,5 +1,6 @@
 package tn.esprit.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -131,6 +132,20 @@ public class LoginController implements Initializable {
             stage.show();
         } catch (Exception e) {
             loginMessageLabel.setText("Error loading signup form: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void handleForgotPassword(ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/reset_password.fxml"));
+            Stage stage = (Stage) emailTextField.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Reset Password");
+            stage.show();
+        } catch (Exception e) {
+            loginMessageLabel.setText("Error loading reset password form");
             e.printStackTrace();
         }
     }

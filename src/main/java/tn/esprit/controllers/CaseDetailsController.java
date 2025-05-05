@@ -119,7 +119,7 @@ public class CaseDetailsController {
     }
     private String findUserNameById(int userId) {
         try (Connection cnx = MyDataBase.getInstance().getCnx();
-             PreparedStatement pstmt = cnx.prepareStatement("SELECT name FROM users WHERE id = ?")) {
+             PreparedStatement pstmt = cnx.prepareStatement("SELECT name FROM user WHERE id = ?")) {
 
             pstmt.setInt(1, userId);
             ResultSet rs = pstmt.executeQuery();

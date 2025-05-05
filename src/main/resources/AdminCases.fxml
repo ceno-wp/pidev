@@ -30,29 +30,42 @@
          <Font name="System Bold" size="12.0" />
       </font>
    </Text>
-   <AnchorPane fx:id="statsPane"
-               layoutX="20.0" layoutY="20.0"
-               prefHeight="150.0" prefWidth="690.0"
-               style="-fx-background-radius: 15; -fx-border-radius: 15;"
-               styleClass="DashboardSideBarColor"
-               stylesheets="@style.css">
+   <AnchorPane fx:id="statsPane" layoutX="20.0" layoutY="-8.0" prefHeight="172.0" prefWidth="690.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" styleClass="DashboardSideBarColor" stylesheets="@style.css">
       <children>
-         <Label fx:id="totalCasesLabel"
-                layoutX="90.0" layoutY="50.0"
-                text="0"
-                font="Consolas Bold 24"
-                style="-fx-text-fill: white;" />
-         <Label fx:id="claimedCasesLabel"
-                layoutX="317.0" layoutY="50.0"
-                text="0"
-                font="Consolas Bold 24"
-                style="-fx-text-fill: #28a745;" />
-         <Label fx:id="resolvedCasesLabel"
-                layoutX="547.0" layoutY="50.0"
-                text="0"
-                font="Consolas Bold 24"
-                style="-fx-text-fill: #fd7e14;" />
+         <Label fx:id="totalCasesLabel" layoutX="98.0" layoutY="86.0" style="-fx-text-fill: white;" text="0">
+            <font>
+               <Font name="Consolas" size="24.0" />
+            </font>
+         </Label>
+
+         <Label fx:id="claimedCasesLabel" layoutX="338.0" layoutY="86.0" style="-fx-text-fill: #28a745;" text="0">
+            <font>
+               <Font name="Consolas" size="24.0" />
+            </font>
+         </Label>
+
+         <Label fx:id="resolvedCasesLabel" layoutX="580.0" layoutY="86.0" style="-fx-text-fill: #fd7e14;" text="0">
+            <font>
+               <Font name="Consolas" size="24.0" />
+            </font>
+         </Label>
+         <Text fill="WHITE" layoutX="32.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Cases">
+            <font>
+               <Font name="Corbel Bold" size="21.0" />
+            </font>
+         </Text>
+         <Text fill="WHITE" layoutX="479.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Resolved Cases">
+            <font>
+               <Font name="Corbel Bold" size="21.0" />
+            </font>
+         </Text>
+         <Text fill="WHITE" layoutX="255.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Claimed Cases">
+            <font>
+               <Font name="Corbel Bold" size="21.0" />
+            </font>
+         </Text>
       </children>
    </AnchorPane>
+
 
 </AnchorPane>

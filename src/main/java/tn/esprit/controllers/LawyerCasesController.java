@@ -1,28 +1,40 @@
 package tn.esprit.controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.stage.Stage;
 import tn.esprit.models.Case;
 import tn.esprit.services.CaseService;
 import tn.esprit.utils.SessionManager;
 
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
 public class LawyerCasesController {
     @FXML private ListView<Case> casesListView;
     private final CaseService caseService = new CaseService();
 
+
     @FXML
     public void initialize() {
         int lawyerId = SessionManager.getCurrentUser().getId();
         casesListView.setItems(caseService.getClaimedCasesObservable(lawyerId));
         casesListView.setCellFactory(list -> new ClaimedCaseCell());
+    }
+
+
+
+    private void showErrorAlert(String navigationError, String s) {
     }
 
     private class ClaimedCaseCell extends ListCell<Case> {
@@ -58,7 +70,9 @@ public class LawyerCasesController {
                 titleLabel.setText(caseObj.getTitle());
                 dateLabel.setText("Posted: " + caseObj.getCreatedAt()
                         .format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
+                closeBtn.setText(caseObj.getStatus());
                 setGraphic(container);
+
             }
         }
 

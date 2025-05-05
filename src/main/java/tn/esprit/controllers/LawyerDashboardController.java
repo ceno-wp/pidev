@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import tn.esprit.models.Case;
+import tn.esprit.utils.SessionManager;
 
 import java.io.IOException;
 
@@ -83,9 +84,18 @@ public class LawyerDashboardController {
     }
 
     @FXML
+    private void handleSignOut() {
+        SessionManager.logout();
+        loadPage("/login.fxml");
+    }
+
+
+
+
+    @FXML
     private void showMyCases() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AdminCases.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/LawyerCases.fxml"));
             Parent casesView = loader.load();
             contentPane.getChildren().setAll(casesView);
         } catch (IOException e) {

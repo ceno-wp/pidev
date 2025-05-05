@@ -23,15 +23,15 @@ public class ManageUserController {
     @FXML private ComboBox<String> filterComboBox;
     @FXML private Label statusLabel;
     @FXML private Label userInfoLabel;
-    @FXML private ImageView brandingImageView;
+
 
     private ObservableList<User> allUsers = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
-        File brandingFile = new File("images/Logo.png");
-        Image brandingImage = new Image(brandingFile.toURI().toString());
-        brandingImageView.setImage(brandingImage);
+
+
+
         setupTableColumns();
         setupFilterComboBox();
         loadUsersFromDatabase();

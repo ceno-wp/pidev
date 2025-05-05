@@ -104,7 +104,7 @@
                   <Insets left="20.0" right="20.0" />
                </VBox.margin>
                 </Button>
-            <Button mnemonicParsing="false" onAction="#handleBack" prefHeight="50.0" prefWidth="210.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@style.css" text="Homepage  ">
+            <Button mnemonicParsing="false" onAction="#handleBack" prefHeight="50.0" prefWidth="210.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@style.css" text="Homepage">
                <font>
                   <Font name="Consolas Bold" size="17.0" />
                </font>
@@ -123,7 +123,7 @@
                   <Insets left="20.0" right="20.0" />
                </VBox.margin>
             </Button>
-                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="210.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@style.css" text="Signout">
+                <Button mnemonicParsing="false" onAction="#handleSignOut" prefHeight="50.0" prefWidth="210.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@style.css" text="Signout">
                     <font>
                         <Font name="Consolas Bold" size="17.0" />
                     </font>
@@ -161,7 +161,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <AreaChart prefHeight="323.0" prefWidth="350.0">
+                  <AreaChart fx:id="areaChart" prefHeight="323.0" prefWidth="350.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -169,7 +169,7 @@
                       <NumberAxis side="LEFT" />
                     </yAxis>
                   </AreaChart>
-                  <ScatterChart GridPane.columnIndex="1">
+                  <ScatterChart fx:id="scatterChart" GridPane.columnIndex="1">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>

@@ -55,7 +55,7 @@
             <Font name="Consolas" size="17.0" />
         </font>
     </Button>
-    <Button layoutX="22.0" layoutY="417.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="155.0" style="-fx-background-radius: 13; -fx-border-radius: 13;" stylesheets="@style.css" text="idk">
+    <Button layoutX="22.0" layoutY="417.0" mnemonicParsing="false" onAction="#handleAppointment" prefHeight="44.0" prefWidth="155.0" style="-fx-background-radius: 13; -fx-border-radius: 13;" stylesheets="@style.css" text="Appointment">
         <styleClass>
             <String fx:value="SideBarColor" />
             <String fx:value="Navbar-back-button" />

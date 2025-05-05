@@ -172,19 +172,22 @@ public class ChatController {
 
     private void addMessageToChat(String message, boolean isSender, String messageId) {
         if (!isDuplicate(messageId)) {
-            // Create message bubble
+            // Create message text
             Text text = new Text(message);
-            text.setFill(Color.BLACK);
+            text.setFill(isSender ? Color.WHITE : Color.BLACK);
 
+            // Create text flow with styling
             TextFlow textFlow = new TextFlow(text);
             textFlow.setMaxWidth(250);
             textFlow.setPadding(new Insets(8, 12, 8, 12));
+            textFlow.getStyleClass().add(isSender ? "sent-bubble" : "received-bubble");
 
-            // Create container for alignment
+            // Create message container
             HBox messageBubble = new HBox(textFlow);
             messageBubble.setMaxWidth(messageContainer.getWidth());
             messageBubble.setAlignment(isSender ? Pos.CENTER_RIGHT : Pos.CENTER_LEFT);
             messageBubble.getStyleClass().add(isSender ? "sent-message" : "received-message");
+            messageBubble.setPadding(new Insets(5));
 
             // Add to chat container
             messageContainer.getChildren().add(messageBubble);

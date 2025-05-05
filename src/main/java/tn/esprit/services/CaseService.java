@@ -306,4 +306,40 @@ public class CaseService {
             System.err.println("Error deleting case: " + e.getMessage());
         }
     }
+
+    public int getTotalCasesCount() {
+        String query = "SELECT COUNT(*) FROM legal_case";
+        try (Connection cnx = MyDataBase.getInstance().getCnx();
+             Statement stmt = cnx.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            return rs.next() ? rs.getInt(1) : 0;
+        } catch (SQLException e) {
+            System.err.println("Error getting total cases count: " + e.getMessage());
+            return 0;
+        }
+    }
+
+    public int getClaimedCasesCount() {
+        String query = "SELECT COUNT(*) FROM legal_case WHERE claimed_by_id IS NOT NULL";
+        try (Connection cnx = MyDataBase.getInstance().getCnx();
+             Statement stmt = cnx.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            return rs.next() ? rs.getInt(1) : 0;
+        } catch (SQLException e) {
+            System.err.println("Error getting claimed cases count: " + e.getMessage());
+            return 0;
+        }
+    }
+
+    public int getResolvedCasesCount() {
+        String query = "SELECT COUNT(*) FROM legal_case WHERE resolved_at IS NOT NULL";
+        try (Connection cnx = MyDataBase.getInstance().getCnx();
+             Statement stmt = cnx.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            return rs.next() ? rs.getInt(1) : 0;
+        } catch (SQLException e) {
+            System.err.println("Error getting resolved cases count: " + e.getMessage());
+            return 0;
+        }
+    }
 }

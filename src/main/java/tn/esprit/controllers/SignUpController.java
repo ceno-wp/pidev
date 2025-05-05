@@ -9,6 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -113,10 +116,7 @@ public class SignUpController {
         roleComboBox.getSelectionModel().selectFirst(); // Reset to Client
     }
 
-    @FXML
-    private void handleLoginLink() {
-        loadLoginScene();
-    }
+
 
     private boolean validateInputs() {
         errorLabel.setText("");
@@ -154,19 +154,28 @@ public class SignUpController {
 
         return true;
     }
+    @FXML
+    private void handleLoginLink() { // Matches onAction
+        loadLoginScene();
+    }
 
     private void loadLoginScene() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+            // Get absolute path to FXML
+            URL fxmlLocation = getClass().getResource("/login.fxml");
+            if (fxmlLocation == null) {
+                throw new IOException("Cannot find login.fxml in resources");
+            }
+
+            Parent root = FXMLLoader.load(fxmlLocation);
             Stage stage = (Stage) loginLink.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Login");
         } catch (Exception e) {
-            errorLabel.setText("Error loading login page");
+            errorLabel.setText("Error: Missing login page");
             e.printStackTrace();
         }
     }
-
     private void showAlert(AlertType type, String title, String message) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
@@ -174,25 +183,6 @@ public class SignUpController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    @FXML
-    public void handleLoginLink(javafx.event.ActionEvent actionEvent) {
-        try {
-            // Load the signup.fxml file
-            Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
 
-            // Create new scene
-            Scene scene = new Scene(root);
 
-            // Get the current stage
-            Stage stage = (Stage) signupButton.getScene().getWindow();
-
-            // Set the new scene
-            stage.setScene(scene);
-            stage.setTitle("");
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-            errorLabel.setText("Error loading signup form");
-        }
-    }
 }

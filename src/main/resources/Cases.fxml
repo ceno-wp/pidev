@@ -58,7 +58,7 @@
    <Line endX="21.0" endY="7.62939453125E-6" layoutX="200.0" layoutY="105.0" startX="-200.0" startY="0.0" />
 
    <!-- idk Button -->
-   <Button layoutX="39.0" layoutY="421.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="142.0" style="-fx-background-radius: 13; -fx-border-radius: 13;" stylesheets="@style.css" text="idk">
+   <Button layoutX="39.0" layoutY="421.0" mnemonicParsing="false" onAction="#handleAppointment" prefHeight="44.0" prefWidth="142.0" style="-fx-background-radius: 13; -fx-border-radius: 13;" stylesheets="@style.css" text="Appointment">
       <styleClass>
          <String fx:value="SideBarColor" />
          <String fx:value="Navbar-back-button" />

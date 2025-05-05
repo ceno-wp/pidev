@@ -30,7 +30,7 @@
             <Font name="Consolas Bold" size="17.0" />
         </font>
     </Button>
-    <Button layoutX="17.0" layoutY="489.0" mnemonicParsing="false" onAction="#handleDiscover" prefHeight="44.0" prefWidth="176.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@style.css" text="  Sign Out">
+    <Button layoutX="17.0" layoutY="489.0" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="44.0" prefWidth="176.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@style.css" text="  Sign Out">
         <styleClass>
             <String fx:value="White" />
             <String fx:value="Admin-Navbar-back-button" />
